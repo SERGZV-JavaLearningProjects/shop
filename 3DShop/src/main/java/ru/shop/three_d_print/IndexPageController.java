@@ -9,14 +9,12 @@ public class IndexPageController
     @GetMapping
     public String test()
     {
-        System.out.println("Дошло");
-        return "3d_shop";
+        return "index";
     }
 
     @GetMapping("/3d_shop")
     public String sayHello()
     {
-        System.out.println("Дошло");
         return "3d_shop";
     }
 }
