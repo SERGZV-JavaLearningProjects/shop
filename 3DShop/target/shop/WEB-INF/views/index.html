@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>3d_shop</title>
+    <style>
+        .page
+        {
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .center_frame
+        {
+            width:100%;
+            height:800px;
+            margin-top: 10px;
+            border:1px solid #082567;
+        }
+    </style>
 </head>
-    <body>
-        <h2> Welcome </h2>>
-    </body>
+<body style="margin: 0">
+    <div class="page">
+        <header th:insert="~{fragments :: header}"></header>
+
+        <main style="margin-left: 10%; margin-right: 10%;">
+            <h2> Welcome! </h2>
+            <div class="text">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diem
+                nonummy nibh euismod tincidunt ut lacreet dolore magna aliguam erat volutpat.
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diem
+                nonummy nibh euismod tincidunt ut lacreet dolore magna aliguam erat volutpat.
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diem
+                nonummy nibh euismod tincidunt ut lacreet dolore magna aliguam erat volutpat.
+            </div>
+            
+            <div class="center_frame"></div><br/>
+        </main>
+
+        <footer th:insert="~{fragments :: footer}" style="margin-top: auto;" ></footer>
+    </div>
+</body>
 </html>
