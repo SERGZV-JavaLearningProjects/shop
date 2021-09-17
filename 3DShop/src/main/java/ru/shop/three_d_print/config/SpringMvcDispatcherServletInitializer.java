@@ -1,5 +1,24 @@
 package ru.shop.three_d_print.config;
 
-public class SprinMvcDispatcherServletInitializer
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+public class SpringMvcDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer
 {
+    @Override
+    protected Class<?>[] getRootConfigClasses()
+    {
+        return null;
+    }
+
+    @Override
+    protected Class<?>[] getServletConfigClasses()
+    {
+        return new Class[] {SpringConfig.class};
+    }
+
+    @Override
+    protected String[] getServletMappings()
+    {
+        return new String[] {"/"};
+    }
 }
