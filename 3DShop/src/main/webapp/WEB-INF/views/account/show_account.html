@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>My account</title>
+    <style>
+        .large_text
+        {
+            font-size: 17px;
+            position: absolute;
+        }
+        .large_bold_text
+        {
+            font-size: 17px;
+            position: absolute;
+            margin-left: 120px;
+            font-weight: 900;
+        }
+    </style>
 </head>
 <body>
+    <div style="background: #047ad4; line-height: 1.5; width: 250px; height: 250px; position: absolute; margin: 2% 2%">
+        <span style="font-size: 20px; position: absolute; margin-top: -5px; margin-left: 60px">Account Info</span><br>
 
+        <span class="large_text"> Your id: </span><span class="large_bold_text" th:text="${account.getId()}">2</span><br>
+        <span class="large_text"> First Name: </span><span class="large_bold_text" th:text="${account.getFirstName()}"></span><br>
+        <span class="large_text"> Middle Name: </span><span class="large_bold_text" th:text="${account.getMiddleName()}"></span><br>
+        <span class="large_text"> Last Name: </span><span class="large_bold_text" th:text="${account.getLastName()}"></span><br>
+    </div>
 </body>
 </html>

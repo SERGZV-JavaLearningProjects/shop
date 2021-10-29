@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.shop.three_d_print.dao.AccountDAO;
 
-//@Controller
-//@RequestMapping("/account")
+@Controller
+@RequestMapping("/account")
 public class AccountsController
 {
-//    private AccountDAO accountDAO;
+    private AccountDAO accountDAO;
 
-//    @Autowired
-//    public AccountsController(AccountDAO accountDAO) { this.accountDAO = accountDAO; }
+    @Autowired
+    public AccountsController(AccountDAO accountDAO) { this.accountDAO = accountDAO; }
 
-//    @GetMapping("/{id}")
-//    public String showAccount(@PathVariable int id, Model model)
-//    {
-//        model.addAttribute("person", accountDAO.GetAccount(id));
-//        return "account/show_account";
-//    }
+    @GetMapping("/{id}")
+    public String showAccount(@PathVariable int id, Model model)
+    {
+        model.addAttribute("account", accountDAO.GetAccount(id));
+        return "account/show_account";
+    }
 }
