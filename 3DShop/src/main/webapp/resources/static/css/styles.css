@@ -1,0 +1,26 @@
+.page
+{
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.center_frame
+{
+    width:100%;
+    height:800px;
+    margin-top: 10px;
+    border:1px solid #082567;
+}
+.large_text
+{
+    font-size: 17px;
+    position: absolute;
+}
+.large_bold_text
+{
+    font-size: 17px;
+    position: absolute;
+    margin-left: 120px;
+    font-weight: 900;
+}
