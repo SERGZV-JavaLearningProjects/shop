@@ -6,6 +6,9 @@ public class Account
     private String firstName;
     private String middleName;
     private String lastName;
+    private String age;
+    private String gender;
+    private String email;
     private Cart cart;
 
     public Account(int id, String name)

@@ -11,6 +11,7 @@ public class AccountDAO
 {
     private static int ACCOUNT_ID = 0;
     private List<Account> accounts = new ArrayList<>();
+//  jdbc:postgresql://localhost:5432/three_d_shop_db
 
     {
         accounts.add(new Account(++ACCOUNT_ID, "Bob"));

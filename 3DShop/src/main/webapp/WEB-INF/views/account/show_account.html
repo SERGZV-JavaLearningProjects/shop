@@ -6,13 +6,28 @@
     <link rel="stylesheet" type="text/css" href="/resources/static/css/styles.css">
 </head>
 <body>
-    <div style="background: #047ad4; line-height: 1.5; width: 250px; height: 250px; position: absolute; margin: 2% 2%">
-        <span style="font-size: 20px; position: absolute; margin-top: -5px; margin-left: 60px">Account Info</span><br>
+    <div style="width: 250px; height: 540px; position: absolute; top: 50px; right: 20px">
+        <div style="background: #113be8; line-height: 2; height: 250px; position: relative; margin-right: auto">
+            <span style="font-size: 20px; position: absolute; margin-top: -5px; margin-left: 60px">Account Info</span><br>
 
-        <span class="large_text"> Your id: </span><span class="large_bold_text" th:text="${account.getId()}">2</span><br>
-        <span class="large_text"> First Name: </span><span class="large_bold_text" th:text="${account.getFirstName()}"></span><br>
-        <span class="large_text"> Middle Name: </span><span class="large_bold_text" th:text="${account.getMiddleName()}"></span><br>
-        <span class="large_text"> Last Name: </span><span class="large_bold_text" th:text="${account.getLastName()}"></span><br>
+            <span class="large_text"> Your id: </span>
+            <span class="large_bold_text" th:text="${account.getId()}"></span><br>
+
+            <span class="large_text"> First Name: </span>
+            <span class="large_bold_text" th:text="${account.getFirstName()}"></span><br>
+
+            <span class="large_text"> Middle Name: </span>
+            <span class="large_bold_text" th:text="${account.getMiddleName()}"></span><br>
+
+            <span class="large_text"> Last Name: </span>
+            <span class="large_bold_text" th:text="${account.getLastName()}"></span><br>
+
+        </div>
+
+        <div style="background: #113be8; width: 250px; height: 250px; position: relative; top: 40px">
+            <input type="image" style="position: relative; top: 25%; left: 28%;"
+                   width="120px" height="120px" src="/resources/static/images/shopping_basket.png">
+        </div>
     </div>
 </body>
 </html>
