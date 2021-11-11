@@ -6,16 +6,10 @@ public class Account
     private String firstName;
     private String middleName;
     private String lastName;
-    private String age;
+    private int age;
     private String gender;
     private String email;
     private Cart cart;
-
-    public Account(int id, String name)
-    {
-        this.id = id;
-        this.firstName = name;
-    }
 
     public int getId()
     {
@@ -50,6 +44,36 @@ public class Account
     public String getLastName()
     {
         return lastName;
+    }
+
+    public int getAge()
+    {
+        return age;
+    }
+
+    public void setAge(int age)
+    {
+        this.age = age;
+    }
+
+    public String getGender()
+    {
+        return gender;
+    }
+
+    public void setGender(String gender)
+    {
+        this.gender = gender;
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
     }
 
     public void setLastName(String lastName)

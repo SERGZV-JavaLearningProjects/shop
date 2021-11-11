@@ -25,21 +25,12 @@
 {
     font-size: 17px;
     position: absolute;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 .large_bold_text
 {
     font-size: 17px;
     position: absolute;
-    margin-left: 120px;
+    margin-left: 125px;
     font-weight: 900;
-}
-.style1
-{
-
-}
-
-.style2 .style1
-{
-
 }
