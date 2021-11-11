@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My account</title>
+    <link rel="stylesheet" type="text/css" href="/resources/static/css/styles.css">
+</head>
+<body>
+    <div style="width: 350px; height: 550px; position: absolute; top: 50px; right: 20px">
+        <div style="background: #113be8; line-height: 2; height: 255px; position: relative">
+            <span style="font-size: 20px; position: absolute; margin-top: -5px; margin-left: 100px">Account Info</span><br>
+
+            <span class="large_text"> Your id: </span>
+            <span class="large_bold_text" th:text="${account.getId()}"></span><br>
+
+            <span class="large_text"> First Name: </span>
+            <span class="large_bold_text" th:text="${account.getFirstName()}"></span><br>
+
+            <span class="large_text"> Middle Name: </span>
+            <span class="large_bold_text" th:text="${account.getMiddleName()}"></span><br>
+
+            <span class="large_text"> Last Name: </span>
+            <span class="large_bold_text" th:text="${account.getLastName()}"></span><br>
+
+            <span class="large_text"> Age: </span>
+            <span class="large_bold_text" th:text="${account.getAge()}"></span><br>
+
+            <span class="large_text"> Gender: </span>
+            <span class="large_bold_text" th:text="${account.getGender()}"></span><br>
+
+            <span class="large_text"> Email: </span>
+            <span class="large_bold_text" th:text="${account.getEmail()}"></span><br>
+        </div>
+
+        <div style="background: #113be8; height: 255px; position: relative; top: 40px">
+            <input type="image" style="position: relative; top: 24%; left: 30%;"
+                   width="140px" height="140px" src="/resources/static/images/shopping_basket.png">
+        </div>
+    </div>
+</body>
+</html>
