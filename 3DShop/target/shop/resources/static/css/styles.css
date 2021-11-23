@@ -1,18 +1,24 @@
+/*Zeroing */
+p{margin: 0;}
+/*----------*/
 :root
 {
     --site-color-one: #113be8;
     --site-color-two: #2d54f5;
     --site-color-three: #c5e384;
 }
-
-
-
 .page
 {
     overflow: hidden;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+}
+.center
+{
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 .center_frame
 {
@@ -33,4 +39,29 @@
     position: absolute;
     margin-left: 125px;
     font-weight: 900;
+}
+.shrikhand
+{
+    font-family: 'Shrikhand', cursive;
+    font-size: 25px;
+    font-weight: 100;
+}
+.reg_window
+{
+    background: #4bd40b;
+    position: absolute;
+    width: 300px;
+    height: 330px;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+}
+.reg_form
+{
+    position: relative;
+    height: 293px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center
 }

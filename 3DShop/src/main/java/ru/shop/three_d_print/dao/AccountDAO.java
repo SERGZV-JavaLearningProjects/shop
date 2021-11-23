@@ -4,15 +4,12 @@ import org.springframework.stereotype.Component;
 import ru.shop.three_d_print.models.Account;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class AccountDAO
 {
     private static int ACCOUNT_ID = 0;
 
-//  jdbc:postgresql://localhost:5432/three_d_shop_db
     private static final String URL = "jdbc:postgresql://localhost:5432/three_d_shop_db";
     private static final String USERNAME = "postgres";
     private static final String PASSWORD = "666999Qw";
@@ -40,9 +37,35 @@ public class AccountDAO
         }
     }
 
-    public Account GetAccount(int id)
+    public boolean createAccount(Account account)
     {
-        Account account = new Account();
+        boolean success = true;
+
+        try
+        {
+            String SQL = "INSERT INTO account(fname, mname, lname, age, sex, email, login, password) VALUES (?,?,?,?,?,?,?,?)";
+            PreparedStatement statement = connection.prepareStatement(SQL);
+            statement.setString(1, account.getFirstName());
+            statement.setString(2, account.getMiddleName());
+            statement.setString(3, account.getLastName());
+            statement.setInt(4, account.getAge());
+            statement.setString(5, account.getSex());
+            statement.setString(6, account.getEmail());
+            statement.setString(7, account.getLogin());
+            statement.setString(8, account.getPassword());
+            statement.executeUpdate();
+        }
+        catch (SQLException exception)
+        {
+            exception.printStackTrace();
+        }
+
+        return success;
+    }
+
+    public Account getAccount(int id)
+    {
+        Account account = null;
 
         try
         {
@@ -54,19 +77,24 @@ public class AccountDAO
             {
                 if(resultSet.getInt("id") == id)
                 {
-                    account.setId(id);
-                    account.setFirstName(resultSet.getString("fname"));
-                    account.setMiddleName(resultSet.getString("mname"));
-                    account.setLastName(resultSet.getString("lname"));
-                    account.setAge(resultSet.getInt("age"));
-                    account.setGender(resultSet.getString("gender"));
-                    account.setEmail(resultSet.getString("email"));
+                    account = new Account
+                    (
+                        id,
+                        resultSet.getString("fname"),
+                        resultSet.getString("mname"),
+                        resultSet.getString("lname"),
+                        resultSet.getInt("age"),
+                        resultSet.getString("sex"),
+                        resultSet.getString("email"),
+                        resultSet.getString("login"),
+                        resultSet.getString("password")
+                    );
                 }
             }
         }
-        catch (SQLException throwables)
+        catch (SQLException exception)
         {
-            throwables.printStackTrace();
+            exception.printStackTrace();
         }
 
         return account;
