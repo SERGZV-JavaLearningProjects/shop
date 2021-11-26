@@ -77,18 +77,16 @@ public class AccountDAO
             {
                 if(resultSet.getInt("id") == id)
                 {
-                    account = new Account
-                    (
-                        id,
-                        resultSet.getString("fname"),
-                        resultSet.getString("mname"),
-                        resultSet.getString("lname"),
-                        resultSet.getInt("age"),
-                        resultSet.getString("sex"),
-                        resultSet.getString("email"),
-                        resultSet.getString("login"),
-                        resultSet.getString("password")
-                    );
+                    account = new Account();
+                    account.setId(id);
+                    account.setFirstName(resultSet.getString("fname"));
+                    account.setMiddleName(resultSet.getString("mname"));
+                    account.setLastName(resultSet.getString("lname"));
+                    account.setAge(resultSet.getInt("age"));
+                    account.setSex(resultSet.getString("sex"));
+                    account.setEmail(resultSet.getString("email"));
+                    account.setLogin(resultSet.getString("login"));
+                    account.setPassword(resultSet.getString("password"));
                 }
             }
         }

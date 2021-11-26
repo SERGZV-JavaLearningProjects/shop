@@ -16,20 +16,28 @@
             <div class="reg_window">
                 <p class="shrikhand" style="background: red; position: relative; text-align: center">Registration</p>
 
-                <form style="height: 293px" method="POST" action="/account/created">
+                <form style="height: 293px" method="POST" action="/account/created" th:object="${account}">
                     <div class="reg_form">
-                        <input name="fname" type="text" placeholder="Name"/>
-                        <input name="mname" type="text" placeholder="Middle name"/>
-                        <input name="lname" type="text" placeholder="Last name"/>
-                        <input name="age" type="number" placeholder="Age"/>
-                        <select name="sex" >
+                        <input type="text" th:field="*{firstName}" placeholder="Name"/>
+                        <input type="text" th:field="*{middleName}" placeholder="Middle name"/>
+                        <input type="text" th:field="*{lastName}" placeholder="Last name"/>
+                        <input type="number" th:field="*{age}" placeholder="Age"/>
+                        <select name="sex" th:field="*{sex}">
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>
-                        <input name="email" type="text" placeholder="Email"/>
-                        <input name="login" type="text" placeholder="Your nickname"/>
-                        <input name="password" type="text" placeholder="Password"/>
+                        <input type="text" th:field="*{email}" placeholder="Email"/>
+                        <input type="text" th:field="*{login}" placeholder="Your nickname"/>
+                        <input type="text" th:field="*{password}" placeholder="Password"/>
                         <input style="width: 120px; height: 50px" type="submit" value="Create new user"/>
+                    </div>
+                    <div th:if="${#fields.hasErrors()}" class="error_window">
+                        <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Error</p>
+                        <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Error</p>
+                        <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Error</p>
+                        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</p>
+                        <p th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Error</p>
+                        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</p>
                     </div>
                 </form>
             </div>

@@ -3,11 +3,12 @@ package ru.shop.three_d_print.сontrollers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.shop.three_d_print.dao.AccountDAO;
 import ru.shop.three_d_print.models.Account;
 
-import java.util.Map;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/account")
@@ -26,27 +27,17 @@ public class AccountsController
     }
 
     @GetMapping("/new")
-    public String createAccount()
+    public String createAccount(Model model)
     {
+        model.addAttribute("account", new Account());
         return "account/create";
     }
 
     @PostMapping("/created")
-    public String accountCreated(@RequestParam Map<String, Object> params)
+    public String accountCreated(@ModelAttribute @Valid Account account, BindingResult bindingResult)
     {
-        System.out.println("Account created");
-
-        Account account = new Account
-        (
-            (String)params.get("fname"),
-            (String)params.get("mname"),
-            (String)params.get("lname"),
-            Integer.parseInt((String)params.get("age")),
-            (String)params.get("sex"),
-            (String)params.get("email"),
-            (String)params.get("login"),
-            (String)params.get("password")
-        );
+        System.out.println("");
+        if(bindingResult.hasErrors()) return "account/create";
 
         accountDAO.createAccount(account);
         return "account/created";
