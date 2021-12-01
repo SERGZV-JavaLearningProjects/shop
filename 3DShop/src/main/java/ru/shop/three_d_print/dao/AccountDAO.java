@@ -2,7 +2,6 @@ package ru.shop.three_d_print.dao;
 
 import org.springframework.stereotype.Component;
 import ru.shop.three_d_print.models.Account;
-
 import java.sql.*;
 
 @Component
@@ -21,8 +20,7 @@ public class AccountDAO
         try
         {
             Class.forName("org.postgresql.Driver");
-        }
-        catch (ClassNotFoundException e)
+        } catch (ClassNotFoundException e)
         {
             e.printStackTrace();
         }
@@ -37,10 +35,8 @@ public class AccountDAO
         }
     }
 
-    public boolean createAccount(Account account)
+    public void createAccount(Account account)
     {
-        boolean success = true;
-
         try
         {
             String SQL = "INSERT INTO account(fname, mname, lname, age, sex, email, login, password) VALUES (?,?,?,?,?,?,?,?)";
@@ -59,8 +55,27 @@ public class AccountDAO
         {
             exception.printStackTrace();
         }
+    }
 
-        return success;
+    public int getLastAccountId()
+    {
+        try
+        {
+            Statement statement = connection.createStatement();
+            String SQL = "SELECT MAX(id) FROM account;";
+            ResultSet resultSet = statement.executeQuery(SQL);
+
+            if(resultSet.next())
+            {
+                 int id = resultSet.getInt(1);
+                 if(id != 0) return id;
+            }
+        }
+        catch (SQLException exception)
+        {
+            exception.printStackTrace();
+        }
+        return 0;
     }
 
     public Account getAccount(int id)

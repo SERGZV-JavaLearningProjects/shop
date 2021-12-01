@@ -1,12 +1,16 @@
 /*Zeroing */
 p{margin: 0;}
+h2{margin: 0}
 /*----------*/
 :root
 {
     --site-color-one: #113be8;
     --site-color-two: #2d54f5;
     --site-color-three: #c5e384;
+    --border-color: #a9b7c6;
 }
+p{font-size: 18px;}
+h2{font-weight: 300;}
 .page
 {
     overflow: hidden;
@@ -73,4 +77,14 @@ p{margin: 0;}
     text-align: center;
     padding: 10px 0;
     line-height: 23px;
+}
+.info_frame
+{
+    margin-top: 40px;
+    width: 800px;
+    border:1px solid var(--site-color-one);
+    padding: 20px 20px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
 }

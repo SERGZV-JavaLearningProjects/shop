@@ -7,7 +7,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.shop.three_d_print.dao.AccountDAO;
 import ru.shop.three_d_print.models.Account;
-
 import javax.validation.Valid;
 
 @Controller
@@ -34,12 +33,13 @@ public class AccountsController
     }
 
     @PostMapping("/created")
-    public String accountCreated(@ModelAttribute @Valid Account account, BindingResult bindingResult)
+    public String accountCreated(@ModelAttribute @Valid Account account, BindingResult bindingResult, Model model)
     {
-        System.out.println("");
         if(bindingResult.hasErrors()) return "account/create";
 
         accountDAO.createAccount(account);
+        int id = accountDAO.getLastAccountId();
+        model.addAttribute("id", id);
         return "account/created";
     }
 }
