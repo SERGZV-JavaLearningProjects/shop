@@ -1,8 +1,12 @@
 package ru.shop.three_d_print.dao;
 
 import org.springframework.stereotype.Component;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import ru.shop.three_d_print.models.Account;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class AccountDAO
@@ -33,6 +37,45 @@ public class AccountDAO
         {
             throwables.printStackTrace();
         }
+    }
+
+    public List<ObjectError> checkForMatches(Account account)
+    {
+        List<ObjectError> errors = new ArrayList();
+        boolean emailError = false;
+        boolean loginError = false;
+
+        try
+        {
+            String SQL = "SELECT * FROM account WHERE email = ? OR login = ?";
+            PreparedStatement statement = connection.prepareStatement(SQL);
+            statement.setString(1, account.getEmail());
+            statement.setString(2, account.getLogin());
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next())
+            {
+                if(resultSet.getString("email").equals(account.getEmail()))
+                    emailError = true;
+
+                if(resultSet.getString("login").equals(account.getLogin()))
+                    loginError = true;
+
+                if(emailError && loginError) break;
+            }
+
+            if (emailError)
+                errors.add(new ObjectError("email", "Email " + account.getEmail() + " already exists"));
+
+            if (loginError)
+                errors.add(new ObjectError("login", "Login " + account.getLogin() + " already exists"));
+        }
+        catch (SQLException exception)
+        {
+            exception.printStackTrace();
+        }
+
+        return errors;
     }
 
     public void createAccount(Account account)

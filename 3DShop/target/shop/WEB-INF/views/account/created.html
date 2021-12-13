@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <script type="text/javascript" src="/WEB-INF/java_script/test.js"></script>
     <title>Account was created</title>
     <link rel="stylesheet" type="text/css" href="/resources/static/css/styles.css">
 </head>
@@ -12,25 +13,38 @@
         <main style="margin-left: 10%; margin-right: 10%;">
             <div class="info_frame">
                 <h2 style="margin-bottom: 5px" >Redirecting...</h2>
-                <p style="border-bottom: 1px solid var(--border-color)"></p>
-                <p style="margin: 20px 0">
-                    Your account has been successfully created. You will be redirected to your account page in n seconds.
-                    if the transition did not occur automatically, you can do it manually using the button below.
-                </p>
-
-                <div id="sec" >
-                    <p id="sec0">5</p>
+                <p style="border-bottom: 1px solid var(--underline-text-color)"></p>
+                <div style="margin: 20px 0">
+                    <span>Your account has been successfully created. You will be redirected to your account page in</span>
+                    <span id="timer">n</span>
+                    <span>seconds. if the transition did not occur automatically, you can do it manually using the button below.</span>
                 </div>
 
                 <div style="display: flex; justify-content: flex-end">
                     <form action="#" th:action="@{/account/{id}(id=${id})}" method="GET">
-                        <button style="width: 100px; height: 30px" type="submit">Button</button>
+                        <button id="redirect_to_profile" style="width: 100px; height: 30px" type="submit">To profile</button>
                     </form>
                 </div>
             </div>
         </main>
 
         <footer th:insert="~{other/fragments :: footer}" style="margin-top: auto;"></footer>
+
+        <script type="text/javascript">
+            var timer = 20;
+
+            var countDownFunction = setInterval(function ()
+            {
+                timer --;
+                document.getElementById("timer").innerHTML = timer.toString();
+
+                if(timer < 1)
+                {
+                    clearInterval(countDownFunction);
+                    document.getElementById("redirect_to_profile").click();
+                }
+            }, 1000)
+        </script>
     </div>
 </body>
 </html>
