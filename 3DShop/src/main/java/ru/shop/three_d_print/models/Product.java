@@ -4,7 +4,7 @@ public class Product
 {
     private double price;
     private String name;
-    private String image;
+    private String imageLink;
     private String description;
 
     public double getPrice()
@@ -29,12 +29,12 @@ public class Product
 
     public String getImage()
     {
-        return image;
+        return imageLink;
     }
 
     public void setImage(String image)
     {
-        this.image = image;
+        this.imageLink = image;
     }
 
     public String getDescription()

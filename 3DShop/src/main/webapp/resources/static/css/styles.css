@@ -71,6 +71,18 @@ h2{font-weight: 300}
     justify-content: space-around;
     align-items: center
 }
+.item_window
+{
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    background: #2d54f5;
+    width: 1280px;
+    height: 80vh;
+    left: 50%;
+    transform: translate(-50%, 2.5vh)
+}
 .error_window
 {
     background: #a9b7c6;
@@ -90,3 +102,5 @@ h2{font-weight: 300}
     left: 50%;
     transform: translate(-50%, 0);
 }
+
+
