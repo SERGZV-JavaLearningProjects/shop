@@ -19,22 +19,16 @@ public class ItemController
         imageLinks.add("/resources/static/images/products/1/product_test_image.jpg");
         imageLinks.add("/resources/static/images/products/1/product_test_image2.jpg");
         imageLinks.add("/resources/static/images/products/1/product_test_image3.jpg");
-//        imageLinks.add("/resources/static/images/products/1/product_test_image.jpg");
-//        imageLinks.add("/resources/static/images/products/1/product_test_image.jpg");
-//        imageLinks.add("/resources/static/images/products/1/product_test_image.jpg");
-//        imageLinks.add("/resources/static/images/products/1/product_test_image.jpg");
-//        imageLinks.add("/resources/static/images/products/1/product_test_image.jpg");
-//        imageLinks.add("/resources/static/images/products/1/product_test_image.jpg");
-//        imageLinks.add("/resources/static/images/products/1/product_test_image.jpg");
-//        imageLinks.add("/resources/static/images/products/1/product_test_image.jpg");
+        imageLinks.add("/resources/static/images/products/1/product_test_image.jpg");
+        imageLinks.add("/resources/static/images/products/1/product_test_image.jpg");
+        imageLinks.add("/resources/static/images/products/1/product_test_image.jpg");
+        imageLinks.add("/resources/static/images/products/1/product_test_image.jpg");
+        imageLinks.add("/resources/static/images/products/1/product_test_image.jpg");
+        imageLinks.add("/resources/static/images/products/1/product_test_image.jpg");
+        imageLinks.add("/resources/static/images/products/1/product_test_image.jpg");
+        imageLinks.add("/resources/static/images/products/1/product_test_image.jpg");
 
         model.addAttribute("_links", imageLinks);
         return "item/item";
     }
-
-//    @GetMapping("/{test}")
-//    public String test()
-//    {
-//        return "item/test";
-//    }
 }
