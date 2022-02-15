@@ -1,16 +1,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <body>
-        <header th:fragment="header" style="background: #113be8">
-            <img style="margin: 5px 10%" width="200" height="70" th:src="@{/resources/static/images/logo.png}">
+        <header th:fragment="header" style="position: relative; background: #113be8">
+            <img style="margin: 5px 10%" width="200" height="70" th:src="@{/resources/static/images/elements/logo.png}">
 
             <div style="position: absolute; right: 10%; top: 22px">
                 <form method="GET" action="/account/new">
-                <input type="image" src="/resources/static/images/create_account.png" alt="Create account">
+                <input type="image" src="/resources/static/images/elements/create_account.png" alt="Create account">
                 </form>
             </div>
         </header>
 
-        <footer th:fragment="footer" style="background: #c5e384; display: flex; position: relative; height: 60px;">
+        <footer th:fragment="footer" style="position: relative; background: #c5e384; display: flex; height: 60px;">
             <p style="margin-left: 10%; width: 200px; display: flex; align-items: center;">
                 &copy; Localhost:8080.ru :-)
             </p>
