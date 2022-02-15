@@ -1,49 +1,32 @@
 package ru.shop.three_d_print.models;
 
+import java.util.List;
+
 public class Product
 {
-    private double price;
+    private float price;
+    private List<String> imageLinks;
     private String name;
-    private String imageLink;
     private String description;
+    private int quantity;
 
-    public double getPrice()
-    {
-        return price;
-    }
+    public double getPrice() { return price; }
 
-    public void setPrice(double price)
-    {
-        this.price = price;
-    }
+    public void setPrice(float price) { this.price = price; }
 
-    public String getName()
-    {
-        return name;
-    }
+    public String getName() { return name; }
 
-    public void setName(String name)
-    {
-        this.name = name;
-    }
+    public void setName(String name) { this.name = name; }
 
-    public String getImage()
-    {
-        return imageLink;
-    }
+    public List<String> getImages() { return imageLinks; }
 
-    public void setImage(String image)
-    {
-        this.imageLink = image;
-    }
+    public void setImages(List<String> image) { this.imageLinks = image; }
 
-    public String getDescription()
-    {
-        return description;
-    }
+    public String getDescription() { return description; }
 
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
+    public void setDescription(String description) { this.description = description; }
+
+    public int getQuantity() { return quantity; }
+
+    public void setQuantity(int quantity) { this.quantity = quantity; }
 }
