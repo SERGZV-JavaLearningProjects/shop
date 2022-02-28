@@ -18,7 +18,7 @@
 
                     <div style="position: relative; background: #c5e384; width: 430px; height: 120px; top: 10px; left: 10px; display: flex; overflow: auto">
 
-                        <div th:each="image : ${product.getImages()}">
+                        <div th:each="image : ${order.getProduct().getImages()}">
                             <input type="image" th:src="${image}" alt="miniature" onclick="setNewImage(this)" style="width: 80px; height: 80px; margin: 3px">
                         </div>
 
@@ -26,19 +26,19 @@
                 </div>
 
                 <div style="position: relative; background: #d4790a; width: 30%; display: flex; flex-direction: column; align-items: center">
-                    <h2 th:text="${product.getName()}" ></h2>
-                    <p style="margin-top: 20px" th:text="${product.getDescription()}"></p>
+                    <h2 th:text="${order.getProduct().getName()}" ></h2>
+                    <p style="margin-top: 20px" th:text="${order.getProduct().getDescription()}"></p>
                 </div>
 
                 <div style="position: relative; background: #d4790a; width: 24%; display: flex; flex-direction: column; align-items: center">
 
-                    <h1 th:text="'$ ' + ${product.getPrice()}"></h1>
+                    <h1 th:text="'$ ' + ${order.getProduct().getPrice()}"></h1>
 
 <!--                        <form th:method="POST" th:action="@{/product/add-to-cart}" th:object="${product}" class="product-form">-->
-                        <form th:method="POST" action="/product/add-to-cart" th:object="${product}" class="product-form">
+                        <form th:method="POST" action="/product/add-to-cart" th:object="${order}" class="product-form">
 
                             <label style="font-size: 18px">Quantity</label>
-                            <input type="number" min="1" th:value="${product.getQuantity()}" class="product-form-quantity-field">
+                            <input type="number" min="1" th:value="${order.getQuantity()}" class="product-form-quantity-field">
 
                             <input type="image" src="/resources/static/images/elements/green_button.png" alt="submit" class="product-add-to-cart-button">
                             <p class="product-add-to-cart-button-overlay">Add to cart</p>

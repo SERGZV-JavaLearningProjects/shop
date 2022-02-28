@@ -4,29 +4,34 @@ import java.util.List;
 
 public class Product
 {
-    private float price;
-    private List<String> imageLinks;
+    private int id;
     private String name;
+    private String color;
+    private float price;
     private String description;
-    private int quantity;
+    private List<String> imageLinks;
 
-    public double getPrice() { return price; }
+    public int getId() { return id; }
 
-    public void setPrice(float price) { this.price = price; }
+    public void setId(int id) { this.id = id; }
 
     public String getName() { return name; }
 
     public void setName(String name) { this.name = name; }
 
-    public List<String> getImages() { return imageLinks; }
+    public String getColor() { return color; }
 
-    public void setImages(List<String> image) { this.imageLinks = image; }
+    public void setColor(String color) { this.color = color; }
+
+    public double getPrice() { return price; }
+
+    public void setPrice(float price) { this.price = price; }
 
     public String getDescription() { return description; }
 
     public void setDescription(String description) { this.description = description; }
 
-    public int getQuantity() { return quantity; }
+    public List<String> getImages() { return imageLinks; }
 
-    public void setQuantity(int quantity) { this.quantity = quantity; }
+    public void setImages(List<String> image) { this.imageLinks = image; }
 }

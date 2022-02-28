@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class AccountMapper implements RowMapper<Account>
 {
     @Override
-    public Account mapRow(ResultSet resultSet, int i) throws SQLException
+    public Account mapRow(ResultSet resultSet, int rowNum) throws SQLException
     {
         Account account = new Account();
         account.setId(resultSet.getInt("id"));

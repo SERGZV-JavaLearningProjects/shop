@@ -5,13 +5,19 @@ import java.util.List;
 
 public class Cart
 {
-    List<Product> products = new ArrayList<>();
+    List<Order> orders = new ArrayList<>();
 
     private double getPurchaseAmount()
     {
         double result = 0;
 
-        for (Product product : products) { result += product.getPrice(); }
+        for (Order order : orders)
+        {
+            for (int i = 0; i < order.getQuantity(); i++)
+            {
+                result += order.getProduct().getPrice();
+            }
+        }
 
         return result;
     }
