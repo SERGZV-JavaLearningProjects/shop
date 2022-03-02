@@ -1,6 +1,7 @@
 package ru.shop.three_d_print.сontrollers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +34,7 @@ public class ProductController
         if(product == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Page not found");
 
         Search search = new Search();
-        List<String> imageNames = search.getDirectoryFileNames("images/products/" + id);
+        List<String> imageNames = search.getDirectoryFileNames("static/images/products/" + id);
 
         List<String> imageLinks = new ArrayList<>();
 
