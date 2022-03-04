@@ -23,10 +23,7 @@ public class SpringConfig implements WebMvcConfigurer
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry)
     {
-//        ResourceHandlerRegistration registration = registry.addResourceHandler("/WEB-INF/classes/static/**");
-//        registration.addResourceLocations("/WEB-INF/classes/static/");
-
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
     }
 
     @Autowired
