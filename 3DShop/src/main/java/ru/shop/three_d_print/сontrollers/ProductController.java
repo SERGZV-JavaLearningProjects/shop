@@ -1,7 +1,6 @@
 package ru.shop.three_d_print.сontrollers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,14 +17,10 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductController
 {
-    private ProductDAO productDAO;
+    private final ProductDAO productDAO;
 
     @Autowired
     public ProductController(ProductDAO productDAO) { this.productDAO = productDAO; }
-
-    // Путь к изображениям на сервере
-    // "/E:/Other Files/Development/Java Server/shopRepository/3DShop/target/shop/WEB-INF/classes/images"
-    // /E:/Other Files/Development/Java Server/shopRepository/3DShop/target/shop/WEB-INF/classes/images/products/1/
 
     @GetMapping("/{id}")
     public String showItem(@PathVariable int id, Model model)
@@ -35,11 +30,17 @@ public class ProductController
 
         Search search = new Search();
         List<String> imageNames = search.getDirectoryFileNames("static/images/products/" + id);
-
         List<String> imageLinks = new ArrayList<>();
 
-        for (String imageName : imageNames)
-            imageLinks.add("/resources/static/images/products/" + id + "/" + imageName);
+        if(imageNames.size() > 0)
+        {
+            for (String imageName : imageNames)
+                imageLinks.add("/static/images/products/" + id + "/" + imageName);
+        }
+        else
+        {
+            imageLinks.add("/static/images/elements/no-image.jpg");
+        }
 
         product.setImages(imageLinks);
 
