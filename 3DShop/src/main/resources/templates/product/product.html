@@ -30,7 +30,7 @@
                     <h2 th:text="${bundle.getProduct().getName()}"></h2>
                     <p style="margin-top: 20px" th:text="${bundle.getProduct().getDescription()}"></p>
 
-                    <th:block th:if="${bundle.getProduct().getColor() != ''}">
+                    <th:block th:if="${bundle.getProduct().getColor() != null}">
                         <p style="width: 100%; margin-top: 40px" th:text="${'Color: ' + bundle.getProduct().getColor()}"></p>
                     </th:block>
                 </div>
