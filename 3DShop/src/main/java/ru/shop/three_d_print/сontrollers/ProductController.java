@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import ru.shop.three_d_print.dao.ProductDAO;
-import ru.shop.three_d_print.models.Order;
+import ru.shop.three_d_print.models.Bundle;
 import ru.shop.three_d_print.models.Product;
 import ru.shop.three_d_print.search.Search;
 import java.util.ArrayList;
@@ -43,21 +43,18 @@ public class ProductController
         }
 
         product.setImages(imageLinks);
+        Bundle bundle = new Bundle(product, 1);
+        model.addAttribute("bundle", bundle);
 
-        Order order = new Order();
-        order.setProduct(product);
-        order.setQuantity(1);
-
-        model.addAttribute("order", order);
         return "product/product";
     }
 
     @PostMapping("/add-to-cart")
-    public String addToCart(@ModelAttribute Order order, Model model)
+    public String addToCart(@ModelAttribute Bundle bundle, Model model)
     {
         System.out.println("Метод вызван");
 
-        model.addAttribute("order", order);
+        model.addAttribute("bundle", bundle);
         return "product/product";
     }
 }

@@ -1,15 +1,31 @@
 package ru.shop.three_d_print.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Order
 {
-    private Product product;
-    private int quantity;
+    private List<Bundle> bundles = new ArrayList<>();
 
-    public Product getProduct() { return product; }
+    private double getPurchaseAmount()
+    {
+        double result = 0;
 
-    public void setProduct(Product product) { this.product = product; }
+        for (Bundle bundle : bundles)
+        {
+            result += bundle.getQuantity() * bundle.getProduct().getPrice();
+        }
 
-    public int getQuantity() { return quantity; }
+        return result;
+    }
 
-    public void setQuantity(int quantity) { this.quantity = quantity; }
+    public List<Bundle> getBundles()
+    {
+        return bundles;
+    }
+
+    public void setBundles(List<Bundle> bundles)
+    {
+        this.bundles = bundles;
+    }
 }

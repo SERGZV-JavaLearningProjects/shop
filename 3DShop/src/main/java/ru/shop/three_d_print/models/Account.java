@@ -24,7 +24,7 @@ public class Account
     @Size(min = 8, max = 40, message = "Password length must be between 8 and 40 letters")
     private String password;
 
-    private Cart cart;
+    private Order order;
 
     public int getId() { return id; }
 
