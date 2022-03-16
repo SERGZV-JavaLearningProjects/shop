@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <title>Item name</title>
     <link rel="stylesheet" type="text/css" href="/static/css/common/styles.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/product/product.css" >
+    <link rel="stylesheet" type="text/css" href="/static/css/product/product.css">
+    <script type="text/javascript" src="/static/js/product/product.js"></script>
 </head>
 <body style="margin: 0">
     <div class="page" style="margin: 0">
@@ -51,12 +52,6 @@
         </main>
 
         <footer th:insert="~{other/fragments :: footer}" style="margin-top: auto;" ></footer>
-
-        <script language="JavaScript">
-            var mainImage = document.getElementById("main_product_image");
-
-            function setNewImage(element) { mainImage.src = element.getAttribute('src'); }
-        </script>
     </div>
 </body>
 </html>
