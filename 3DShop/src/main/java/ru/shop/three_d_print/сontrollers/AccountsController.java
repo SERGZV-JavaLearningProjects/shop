@@ -52,4 +52,10 @@ public class AccountsController
         model.addAttribute("id", id);
         return "account/created";
     }
+
+    @GetMapping("/sign-in")
+    public String signIn()
+    {
+        return "account/signIn";
+    }
 }
