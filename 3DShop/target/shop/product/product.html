@@ -37,16 +37,15 @@
                 </div>
 
                 <div class="third_column">
-
                     <h1 th:text="'$ ' + ${bundle.getProduct().getPrice()}"></h1>
-                        <form th:method="POST" action="/product/add-to-cart" th:object="${bundle}" class="product-form">
+                    <form th:method="POST" action="/product/add-to-cart" th:object="${bundle}" class="product-form">
 
-                            <label style="font-size: 18px">Quantity</label>
-                            <input type="number" min="1" th:value="${bundle.getQuantity()}" class="product-form-quantity-field">
+                        <label style="font-size: 18px">Quantity</label>
+                        <input type="number" min="1" th:value="${bundle.getQuantity()}" class="product-form-quantity-field">
 
-                            <input type="image" src="/static/images/elements/green_button.png" alt="submit" class="product-add-to-cart-button">
-                            <p class="product-add-to-cart-button-overlay">Add to cart</p>
-                        </form>
+                        <input type="image" src="/static/images/elements/green_button.png" alt="submit" class="product-add-to-cart-button">
+                        <p class="product-add-to-cart-button-overlay">Add to cart</p>
+                    </form>
                 </div>
             </div>
         </main>

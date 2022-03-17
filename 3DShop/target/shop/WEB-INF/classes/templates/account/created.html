@@ -2,9 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <script type="text/javascript" src="/WEB-INF/java_script/test.js"></script>
     <title>Account was created</title>
-    <link rel="stylesheet" type="text/css" href="/resources/static/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/common/styles.css">
+    <script type="text/javascript" src="/static/js/account/created.js"></script>
 </head>
 <body style="margin: 0">
     <div class="page">
@@ -16,7 +16,7 @@
                 <p style="border-bottom: 1px solid var(--underline-text-color)"></p>
                 <div style="margin: 20px 0">
                     <span>Your account has been successfully created. You will be redirected to your account page in</span>
-                    <span id="timer">n</span>
+                    <span id="_timer">n</span>
                     <span>seconds. if the transition did not occur automatically, you can do it manually using the button below.</span>
                 </div>
 
@@ -30,21 +30,7 @@
 
         <footer th:insert="~{other/fragments :: footer}" style="margin-top: auto;"></footer>
 
-        <script type="text/javascript">
-            var timer = 20;
-
-            var countDownFunction = setInterval(function ()
-            {
-                timer --;
-                document.getElementById("timer").innerHTML = timer.toString();
-
-                if(timer < 1)
-                {
-                    clearInterval(countDownFunction);
-                    document.getElementById("redirect_to_profile").click();
-                }
-            }, 1000)
-        </script>
+        <script type="text/javascript"> countdown(); </script>
     </div>
 </body>
 </html>
