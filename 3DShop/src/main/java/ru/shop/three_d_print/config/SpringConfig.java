@@ -32,14 +32,12 @@ public class SpringConfig implements WebMvcConfigurer
         this.applicationContext = applicationContext;
     }
 
-    @Bean
-    public SpringResourceTemplateResolver templateResolver()
+    @Override
+    public void configureViewResolvers(ViewResolverRegistry registry)
     {
-        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-        templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/");
-        templateResolver.setSuffix(".html");
-        return templateResolver;
+        ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+        resolver.setTemplateEngine(templateEngine());
+        registry.viewResolver(resolver);
     }
 
     @Bean
@@ -51,12 +49,14 @@ public class SpringConfig implements WebMvcConfigurer
         return templateEngine;
     }
 
-    @Override
-    public void configureViewResolvers(ViewResolverRegistry registry)
+    @Bean
+    public SpringResourceTemplateResolver templateResolver()
     {
-        ThymeleafViewResolver resolver = new ThymeleafViewResolver();
-        resolver.setTemplateEngine(templateEngine());
-        registry.viewResolver(resolver);
+        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+        templateResolver.setApplicationContext(applicationContext);
+        templateResolver.setPrefix("/");
+        templateResolver.setSuffix(".html");
+        return templateResolver;
     }
 
     @Bean
