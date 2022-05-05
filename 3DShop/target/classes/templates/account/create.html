@@ -16,7 +16,7 @@
             <div class="reg_window">
                 <p class="shrikhand" style="background: red; position: relative; text-align: center">Registration</p>
 
-                <form style="height: 293px" method="POST" action="/account/created" th:object="${account}">
+                <form style="height: 293px" method="POST" action="/account/created" th:object="${user}">
                     <div class="reg_form">
                         <input type="text" th:field="*{firstName}" placeholder="Name"/>
                         <input type="text" th:field="*{middleName}" placeholder="Middle name"/>
@@ -27,7 +27,7 @@
                             <option value="Female">Female</option>
                         </select>
                         <input type="text" th:field="*{email}" placeholder="Email"/>
-                        <input type="text" th:field="*{login}" placeholder="Your login"/>
+                        <input type="text" th:field="*{username}" placeholder="Your login"/>
                         <input type="text" th:field="*{password}" placeholder="Password"/>
                         <input style="width: 120px; height: 50px" type="submit" value="Create new user"/>
                     </div>
@@ -36,7 +36,7 @@
                         <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Error</p>
                         <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Error</p>
                         <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</p>
-                        <p th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Error</p>
+                        <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Error</p>
                         <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</p>
                     </div>
                 </form>

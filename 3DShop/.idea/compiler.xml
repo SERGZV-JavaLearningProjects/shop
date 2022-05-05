@@ -9,5 +9,13 @@
         <module name="3DShop" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="3DShop" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="3DShop" options="-parameters" />
+    </option>
   </component>
 </project>

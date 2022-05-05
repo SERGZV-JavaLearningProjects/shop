@@ -9,48 +9,47 @@
     <script type="text/javascript" src="/static/js/product/product.js"></script>
 </head>
 <body style="margin: 0">
-    <div class="page" style="margin: 0">
-        <header th:insert="~{other/fragments :: header}"></header>
+<div class="page" style="margin: 0">
+    <header th:insert="~{other/fragments :: header}"></header>
 
-        <main style="margin-left: 17%; margin-right: 17%;">
-            <div class="item_window">
-                <div class="first_column">
+    <main style="margin-left: 17%; margin-right: 17%;">
+        <div class="item_window">
+            <div class="first_column">
 
-                    <img id="main_product_image" th:src="${bundle.getProduct().getImages().get(0)}" alt="Main image" width="100%" height="400px">
+                <img id="main_product_image" th:src="${bundle.getProduct().getImageLinks().get(0)}" alt="Main image" width="100%" height="400px">
 
-                    <div style="position: relative; background: #c5e384; width: 430px; height: 120px; top: 10px; left: 10px; display: flex; overflow: auto">
+                <div style="position: relative; background: #c5e384; width: 430px; height: 120px; top: 10px; left: 10px; display: flex; overflow: auto">
 
-                        <div th:each="image : ${bundle.getProduct().getImages()}">
-                            <input type="image" th:src="${image}" alt="miniature" onclick="setNewImage(this)" style="width: 80px; height: 80px; margin: 3px">
-                        </div>
-
+                    <div th:each="image : ${bundle.getProduct().getImageLinks()}">
+                        <input type="image" th:src="${image}" alt="miniature" onclick="setNewImage(this)" style="width: 80px; height: 80px; margin: 3px">
                     </div>
-                </div>
 
-                <div class="second_column">
-                    <h2 th:text="${bundle.getProduct().getName()}"></h2>
-                    <p style="margin-top: 20px" th:text="${bundle.getProduct().getDescription()}"></p>
-
-                    <th:block th:if="${bundle.getProduct().getColor() != null}">
-                        <p style="width: 100%; margin-top: 40px" th:text="${'Color: ' + bundle.getProduct().getColor()}"></p>
-                    </th:block>
-                </div>
-
-                <div class="third_column">
-                    <h1 th:text="'$ ' + ${bundle.getProduct().getPrice()}"></h1>
-                    <form th:method="POST" action="/product/add-to-cart" th:object="${bundle}" class="product-form">
-
-                        <label style="font-size: 18px">Quantity</label>
-                        <input type="number" min="1" th:value="${bundle.getQuantity()}" class="product-form-quantity-field">
-
-                        <input type="image" src="/static/images/elements/green_button.png" alt="submit" class="product-add-to-cart-button">
-                        <p class="product-add-to-cart-button-overlay">Add to cart</p>
-                    </form>
                 </div>
             </div>
-        </main>
 
-        <footer th:insert="~{other/fragments :: footer}" style="margin-top: auto;" ></footer>
-    </div>
+            <div class="second_column">
+                <h2 th:text="${bundle.getProduct().getName()}"></h2>
+                <p style="margin-top: 20px" th:text="${bundle.getProduct().getDescription()}"></p>
+
+                <th:block th:if="${bundle.getProduct().getColor() != null}">
+                    <p style="width: 100%; margin-top: 40px" th:text="${'Color: ' + bundle.getProduct().getColor()}"></p>
+                </th:block>
+            </div>
+
+            <div class="third_column">
+                <h1 th:text="'$ ' + ${bundle.getProduct().getPrice()}"></h1>
+                <form th:method="POST" action="/product/add-to-cart" th:object="${bundle}" class="product-form">
+
+                    <label style="font-size: 18px">Quantity</label>
+                    <input type="number" min="1" th:value="${bundle.getQuantity()}" class="product-form-quantity-field">
+
+                    <input type="image" src="/static/images/elements/green_button.png" alt="submit" class="product-add-to-cart-button">
+                    <p class="product-add-to-cart-button-overlay">Add to cart</p>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer th:insert="~{other/fragments :: footer}" style="margin-top: auto;" ></footer>
+</div>
 </body>
-</html>
