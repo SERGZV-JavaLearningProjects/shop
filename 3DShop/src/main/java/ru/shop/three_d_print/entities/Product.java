@@ -1,17 +1,14 @@
 package ru.shop.three_d_print.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "t_product")
 public class Product
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String color;

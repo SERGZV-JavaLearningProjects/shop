@@ -8,6 +8,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -37,6 +38,9 @@ public class User implements UserDetails
     private String unencryptedPassword;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
+    @OneToMany(orphanRemoval = true)
+    @JoinColumn(name = "user_id")
+    private List<Order> orders;
 
     public User() {}
 
