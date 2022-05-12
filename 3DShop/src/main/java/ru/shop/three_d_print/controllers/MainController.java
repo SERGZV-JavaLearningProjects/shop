@@ -1,12 +1,18 @@
 package ru.shop.three_d_print.controllers;
 
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import ru.shop.three_d_print.service.UserService;
 
 @Controller
 public class MainController
 {
+    UserService userService;
+
+    @Autowired
+    public MainController(UserService userService) { this.userService = userService; }
+
     @GetMapping
     public String index()
     {
@@ -14,9 +20,9 @@ public class MainController
     }
 
     @GetMapping("/test")
-    @PreAuthorize("hasRole('ROLE_USER')")
     public String test()
     {
+        userService.TestOrder();
         return "main/main";
     }
 }

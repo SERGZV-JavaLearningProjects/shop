@@ -1,6 +1,7 @@
 package ru.shop.three_d_print.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,9 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.ObjectError;
 
-import ru.shop.three_d_print.entities.Role;
-import ru.shop.three_d_print.entities.RoleType;
-import ru.shop.three_d_print.entities.User;
+import ru.shop.three_d_print.entities.*;
 import ru.shop.three_d_print.repository.RoleRepository;
 import ru.shop.three_d_print.repository.UserRepository;
 
@@ -21,22 +20,32 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserService implements UserDetailsService
 {
     @PersistenceContext
     private EntityManager em;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final ProductService productService;
+
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private RoleRepository roleRepository;
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    public UserService
+    (
+        UserRepository userRepository,
+        RoleRepository roleRepository,
+        BCryptPasswordEncoder bCryptPasswordEncoder,
+        ProductService productService
+    )
+    {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.productService = productService;
+    }
 
     public User newUser() { return new User(); }
 
@@ -51,6 +60,35 @@ public class UserService implements UserDetailsService
         userRepository.save(user);
 
         return checkResult;
+    }
+
+    public void TestOrder()
+    {
+        User user = userRepository.findById(26L).get();
+
+        Optional<Product> product1 = productService.findById(1L);
+        Optional<Product> product2 = productService.findById(2L);
+
+        OrderedProduct orderedProduct1 = new OrderedProduct();
+        OrderedProduct orderedProduct2 = new OrderedProduct();
+
+        UserOrder order = new UserOrder();
+
+        orderedProduct1.setProduct(product1.get());
+        orderedProduct1.setProductsCount(5);
+
+        orderedProduct2.setProduct(product2.get());
+        orderedProduct2.setProductsCount(2);
+
+        List<OrderedProduct> orderedProducts = new ArrayList<>();
+        orderedProducts.add(orderedProduct1);
+        orderedProducts.add(orderedProduct2);
+
+        order.setOrderedProducts(orderedProducts);
+
+        user.setOrder(order);
+
+        userRepository.save(user);
     }
 
     public String getCurrentUsername()
