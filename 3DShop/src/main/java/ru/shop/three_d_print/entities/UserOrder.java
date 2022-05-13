@@ -15,10 +15,6 @@ public class UserOrder
     @JoinColumn(name = "order_id")
     private List<OrderedProduct> orderedProducts;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private User user;
-
     public List<OrderedProduct> getOrderedProducts() { return orderedProducts; }
 
     public void setOrderedProducts(List<OrderedProduct> orderedProducts) { this.orderedProducts = orderedProducts; }
