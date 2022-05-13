@@ -99,7 +99,7 @@ public class UserService implements UserDetailsService
 
     public User loadUserById(Long userId)
     {
-        Optional<User> userFromDb = userRepository.findById(userId);
+        Optional<User> userFromDb = userRepository.findById(userId); 
         return userFromDb.orElse(new User());
     }
 
