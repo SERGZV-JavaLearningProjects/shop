@@ -28,8 +28,8 @@ public class MainController
     @GetMapping("/test")
     public String test()
     {
-//        userService.TestOrder();
-        paidOrderService.TestPaidOrder();
+        userService.TestOrder();
+//        paidOrderService.TestPaidOrder();
         return "main/main";
     }
 }

@@ -69,22 +69,16 @@ public class UserService implements UserDetailsService
         Optional<Product> product1 = productService.findById(1L);
         Optional<Product> product2 = productService.findById(2L);
 
-        OrderedProduct orderedProduct1 = new OrderedProduct();
-        OrderedProduct orderedProduct2 = new OrderedProduct();
+        Bundle bundle1 = new Bundle(product1.get(), 5);
+        Bundle bundle2 = new Bundle(product2.get(), 2);
 
         UserOrder order = new UserOrder();
 
-        orderedProduct1.setProduct(product1.get());
-        orderedProduct1.setProductsCount(5);
+        List<Bundle> bundles = new ArrayList<>();
+        bundles.add(bundle1);
+        bundles.add(bundle2);
 
-        orderedProduct2.setProduct(product2.get());
-        orderedProduct2.setProductsCount(2);
-
-        List<OrderedProduct> orderedProducts = new ArrayList<>();
-        orderedProducts.add(orderedProduct1);
-        orderedProducts.add(orderedProduct2);
-
-        order.setOrderedProducts(orderedProducts);
+        order.setBundles(bundles);
 
         user.setOrder(order);
 

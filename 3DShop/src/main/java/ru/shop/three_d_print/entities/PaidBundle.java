@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "t_paid_bundle")
-public class PaidBundle extends Bundle
+public class PaidBundle
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

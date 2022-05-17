@@ -13,9 +13,9 @@ public class UserOrder
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
-    private List<OrderedProduct> orderedProducts;
+    private List<Bundle> bundles;
 
-    public List<OrderedProduct> getOrderedProducts() { return orderedProducts; }
+    public List<Bundle> getBundles() { return bundles; }
 
-    public void setOrderedProducts(List<OrderedProduct> orderedProducts) { this.orderedProducts = orderedProducts; }
+    public void setBundles(List<Bundle> bundles) { this.bundles = bundles; }
 }
