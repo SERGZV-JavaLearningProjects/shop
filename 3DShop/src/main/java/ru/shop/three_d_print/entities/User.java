@@ -31,16 +31,26 @@ public class User implements UserDetails
     @Size(min = 4, max = 40, message = "Nickname length must be between 4 and 40 letters")
     private String username;
     private String password;
-    @Transient
-    private String passwordConfirm;
-    @Transient
-    private String unencryptedPassword;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
     @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
     private UserOrder order;
 
     public User() {}
+
+    public User(Account account)
+    {
+        firstName = account.getFirstName();
+        middleName = account.getMiddleName();
+        lastName = account.getMiddleName();
+        age = account.getAge();
+        sex = account.getSex();
+        email = account.getEmail();
+        username = account.getUsername();
+        password = account.getPassword();
+        roles = account.getRoles();
+        order = account.getOrder();
+    }
 
     public Long getId() { return id; }
 
@@ -79,14 +89,6 @@ public class User implements UserDetails
     public String getPassword() { return password; }
 
     public void setPassword(String password) { this.password = password; }
-
-    public String getPasswordConfirm() { return passwordConfirm; }
-
-    public String getUnencryptedPassword() { return unencryptedPassword; }
-
-    public void setUnencryptedPassword(String unencryptedPassword) { this.unencryptedPassword = unencryptedPassword; }
-
-    public void setPasswordConfirm(String passwordConfirm) { this.passwordConfirm = passwordConfirm; }
 
     public Set<Role> getRoles() { return roles; }
 

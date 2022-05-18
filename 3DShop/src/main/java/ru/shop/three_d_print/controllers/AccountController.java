@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import ru.shop.three_d_print.entities.Account;
 import ru.shop.three_d_print.entities.User;
 import ru.shop.three_d_print.service.UserService;
 
@@ -57,29 +58,29 @@ public class AccountController
     @GetMapping("/new")
     public String getCreate(Model model)
     {
-        model.addAttribute("user", userService.newUser());
+        model.addAttribute("account", userService.newAccount());
         return "account/create";
     }
 
     @PostMapping("/created")
-    public String getCreated(@ModelAttribute @Valid User user, BindingResult bindingResult, HttpServletRequest request)
+    public String getCreated(@ModelAttribute @Valid Account account, BindingResult bindingResult, HttpServletRequest request)
     {
         if(bindingResult.hasErrors()) return "account/create";
 
-        var errors = userService.trySaveUser(user);
+        var errors = userService.trySaveUser(account);
         for(ObjectError error : errors)
             bindingResult.rejectValue(error.getObjectName(), "", Objects.requireNonNull(error.getDefaultMessage()));
         if(bindingResult.hasErrors()) return "account/create";
 
-        authenticateUserAndSetSession(user, request);
+        authenticateUserAndSetSession(account, request);
 
         return "account/created";
     }
 
-    private void authenticateUserAndSetSession(User user, HttpServletRequest request)
+    private void authenticateUserAndSetSession(Account account, HttpServletRequest request)
     {
-        String username = user.getUsername();
-        String password = user.getUnencryptedPassword();
+        String username = account.getUsername();
+        String password = account.getUnencryptedPassword();
 
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
 

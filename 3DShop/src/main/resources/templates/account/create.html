@@ -16,7 +16,7 @@
             <div class="reg_window">
                 <p class="shrikhand" style="background: red; position: relative; text-align: center">Registration</p>
 
-                <form style="height: 293px" method="POST" action="/account/created" th:object="${user}">
+                <form style="height: 293px" method="POST" action="/account/created" th:object="${account}">
                     <div class="reg_form">
                         <input type="text" th:field="*{firstName}" placeholder="Name"/>
                         <input type="text" th:field="*{middleName}" placeholder="Middle name"/>

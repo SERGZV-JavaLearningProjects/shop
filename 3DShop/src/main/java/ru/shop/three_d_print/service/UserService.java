@@ -47,16 +47,18 @@ public class UserService implements UserDetailsService
         this.productService = productService;
     }
 
-    public User newUser() { return new User(); }
+    public Account newAccount() { return new Account(); }
 
-    public List<ObjectError> trySaveUser(User user)
+    public List<ObjectError> trySaveUser(Account account)
     {
-        List<ObjectError> checkResult = ManualUserValidation(user);
+        List<ObjectError> checkResult = ManualUserValidation(account);
         if(checkResult.size() > 0) { return checkResult; }
 
-        user.setRoles(Collections.singleton(new Role(2L, RoleType.USER.get())));
-        user.setUnencryptedPassword(user.getPassword());
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        account.setRoles(Collections.singleton(new Role(2L, RoleType.USER.get())));
+        account.setUnencryptedPassword(account.getPassword());
+        account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
+
+        User user = new User(account);
         userRepository.save(user);
 
         return checkResult;
