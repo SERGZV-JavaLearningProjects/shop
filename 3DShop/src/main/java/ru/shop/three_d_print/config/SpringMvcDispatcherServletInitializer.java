@@ -1,7 +1,13 @@
 package ru.shop.three_d_print.config;
 
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+@Configuration
+@EnableAutoConfiguration
+@ComponentScan
 public class SpringMvcDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer
 {
     @Override
@@ -22,5 +28,3 @@ public class SpringMvcDispatcherServletInitializer extends AbstractAnnotationCon
         return new String[] {"/"};
     }
 }
-
-
