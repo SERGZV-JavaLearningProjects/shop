@@ -20,13 +20,13 @@ public class MainController
     }
 
     @GetMapping
-    public String index()
+    public String getMain()
     {
         return "main/main";
     }
 
     @GetMapping("/test")
-    public String test()
+    public String getTestPage()
     {
         userService.TestOrder();
 //        paidOrderService.TestPaidOrder();

@@ -22,7 +22,7 @@ public class ProductController
     public ProductController(ProductService productService) { this.productService = productService; }
 
     @GetMapping("/{id}")
-    public String showItem(@PathVariable Long id, Model model)
+    public String showProduct(@PathVariable Long id, Model model)
     {
         Optional<Product> product = productService.findById(id);
         product.orElseThrow(() ->  new ResponseStatusException(HttpStatus.NOT_FOUND, "Такой продукт не был найден"));
