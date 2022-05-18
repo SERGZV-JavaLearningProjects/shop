@@ -31,7 +31,6 @@ public class AccountController
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
     @Autowired
     public AccountController(UserService userService, AuthenticationManager authenticationManager)
     {
@@ -43,12 +42,6 @@ public class AccountController
     public String getLogin()
     {
         return "account/login";
-    }
-
-    @GetMapping("/success-login")
-    public String getSuccess()
-    {
-        return "account/success-login";
     }
 
     @GetMapping("/show")
