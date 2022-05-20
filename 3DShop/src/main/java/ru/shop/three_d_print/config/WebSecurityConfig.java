@@ -37,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
             .and()
                 .formLogin()
                 .loginPage("/account/login").permitAll()
-                .defaultSuccessUrl("/");
+                .defaultSuccessUrl("/account/success-login");
     }
 
     @Bean

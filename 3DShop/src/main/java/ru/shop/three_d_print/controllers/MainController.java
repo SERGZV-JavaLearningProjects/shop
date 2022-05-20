@@ -20,10 +20,7 @@ public class MainController
     }
 
     @GetMapping
-    public String getMain()
-    {
-        return "main/main";
-    }
+    public String getMain() { return "main/main"; }
 
     @GetMapping("/test")
     public String getTestPage()

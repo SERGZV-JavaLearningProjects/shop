@@ -18,6 +18,7 @@ import ru.shop.three_d_print.entities.User;
 import ru.shop.three_d_print.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import java.util.Objects;
@@ -40,9 +41,16 @@ public class AccountController
     }
 
     @GetMapping("/login")
-    public String getLogin()
+    public String getLogin() { return "account/login"; }
+
+    @GetMapping("/success-login")
+    public String afterLogin(HttpServletRequest request)
     {
-        return "account/login";
+        String username = userService.getCurrentUsername();
+        HttpSession session = request.getSession();
+        session.setAttribute("username", username);
+
+        return "redirect:/";
     }
 
     @GetMapping("/show")
@@ -84,7 +92,8 @@ public class AccountController
 
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
 
-        request.getSession();
+        HttpSession session = request.getSession();
+        session.setAttribute("username", username);
 
         token.setDetails(new WebAuthenticationDetails(request));
         Authentication authenticatedUser = authenticationManager.authenticate(token);
