@@ -6,3 +6,13 @@
     justify-content: space-between;
     align-items: center;
 }
+.header_user_nick_text
+{
+    font-family: 'Shrikhand', cursive;
+    font-size: 28px;
+    color: var(--green-one);
+    text-shadow: 0 -1px var(--black), 1px 0 var(--black), 0 1px var(--black), -1px 0 var(--black),
+                 0 -2px 1px var(--black), 2px 0 2px var(--black), 0 2px 2px var(--black), -2px 0 2px var(--black),
+                 2px -2px 2px var(--black), 2px 2px 2px var(--black), -2px 2px 2px var(--black), -2px -2px 2px var(--black);
+    letter-spacing: 1px;
+}

@@ -1,13 +1,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-
-<body>
 <header th:fragment="header" style="position: relative; background: #113be8; height: 80px">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/css/other/fragments.css">
+
     <img style="margin: 5px 10%" width="200" height="70" src="/static/images/elements/logo.png" alt="logo">
 
-    <div style="position: absolute; right: 10%; top: 22px; background: #a9b7c6">
+    <div style="position: absolute; right: 10%; top: 22px;/* background: #a9b7c6*/">
         <div class="header_user_group">
+
             <div sec:authorize="isAuthenticated()">
-                <span th:text="${session.username}"></span>
+
+                <span class="header_user_nick_text" th:text="${session.username}"></span>
+
             </div>
             <div sec:authorize="isAnonymous()">
                 <form method="GET" action="/account/new">
