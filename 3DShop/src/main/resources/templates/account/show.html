@@ -5,37 +5,43 @@
     <title>My account</title>
     <link rel="stylesheet" type="text/css" href="/static/css/common/styles.css">
 </head>
-<body>
-    <div style="width: 350px; height: 550px; position: absolute; top: 50px; right: 20px">
-        <div style="background: #113be8; line-height: 2; height: 255px; position: relative">
-            <span style="font-size: 20px; position: absolute; margin-top: -5px; margin-left: 100px">Account Info</span><br>
+<body style="margin: 0">
+    <div class="page">
+        <header th:insert="~{other/fragments :: header}"></header>
 
-            <span class="large_text"> Your id: </span>
-            <span class="large_bold_text" th:text="${user.getId()}"></span><br>
+        <div style="width: 350px; height: 550px; position: relative; top: 50px; left: 20px">
+            <div style="background: #113be8; line-height: 2; height: 255px; position: relative">
+                <span style="font-size: 20px; position: absolute; margin-top: -5px; margin-left: 100px">Account Info</span><br>
 
-            <span class="large_text"> First Name: </span>
-            <span class="large_bold_text" th:text="${user.getFirstName()}"></span><br>
+                <span class="large_text"> Your id: </span>
+                <span class="large_bold_text" th:text="${user.getId()}"></span><br>
 
-            <span class="large_text"> Middle Name: </span>
-            <span class="large_bold_text" th:text="${user.getMiddleName()}"></span><br>
+                <span class="large_text"> First Name: </span>
+                <span class="large_bold_text" th:text="${user.getFirstName()}"></span><br>
 
-            <span class="large_text"> Last Name: </span>
-            <span class="large_bold_text" th:text="${user.getLastName()}"></span><br>
+                <span class="large_text"> Middle Name: </span>
+                <span class="large_bold_text" th:text="${user.getMiddleName()}"></span><br>
 
-            <span class="large_text"> Age: </span>
-            <span class="large_bold_text" th:text="${user.getAge()}"></span><br>
+                <span class="large_text"> Last Name: </span>
+                <span class="large_bold_text" th:text="${user.getLastName()}"></span><br>
 
-            <span class="large_text"> Sex: </span>
-            <span class="large_bold_text" th:text="${user.getSex()}"></span><br>
+                <span class="large_text"> Age: </span>
+                <span class="large_bold_text" th:text="${user.getAge()}"></span><br>
 
-            <span class="large_text"> Email: </span>
-            <span class="large_bold_text" th:text="${user.getEmail()}"></span><br>
+                <span class="large_text"> Sex: </span>
+                <span class="large_bold_text" th:text="${user.getSex()}"></span><br>
+
+                <span class="large_text"> Email: </span>
+                <span class="large_bold_text" th:text="${user.getEmail()}"></span><br>
+            </div>
+
+            <div style="background: #113be8; height: 255px; position: relative; top: 40px">
+                <input type="image" style="position: relative; top: 24%; left: 30%;"
+                       width="140px" height="140px" src="/static/images/elements/shopping_basket.png">
+            </div>
         </div>
 
-        <div style="background: #113be8; height: 255px; position: relative; top: 40px">
-            <input type="image" style="position: relative; top: 24%; left: 30%;"
-                   width="140px" height="140px" src="/static/images/elements/shopping_basket.png">
-        </div>
+        <footer th:insert="~{other/fragments :: footer}" style="margin-top: auto;" ></footer>
     </div>
 </body>
 </html>

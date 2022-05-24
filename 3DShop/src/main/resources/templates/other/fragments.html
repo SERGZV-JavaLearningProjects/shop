@@ -5,19 +5,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/static/css/other/fragments.css">
 
-    <img style="margin: 5px 10%" width="200" height="70" src="/static/images/elements/logo.png" alt="logo">
+    <form method="GET" action="/">
+        <input class="header_logo_button" type="image" src="/static/images/elements/logo.png" alt="На главную">
+    </form>
 
-    <div style="position: absolute; right: 10%; top: 22px;/* background: #a9b7c6*/">
+    <div class="header_exit_button" sec:authorize="isAuthenticated()">
+        <form style="float: right" method="GET" action="/logout">
+            <input type="image" src="/static/images/elements/exit.png" alt="Выйти из системы">
+        </form>
+    </div>
+
+    <div style="position: absolute; right: 10%; top: 22px;">
         <div class="header_user_group">
-
             <div sec:authorize="isAuthenticated()">
-
                 <span class="header_user_nick_text" th:text="${session.username}"></span>
-
+                <form style="float: right; padding-left: 20px" method="GET" action="/account/show">
+                    <input type="image" src="/static/images/elements/account.png" alt="В личный кабинет">
+                </form>
             </div>
+
             <div sec:authorize="isAnonymous()">
-                <form method="GET" action="/account/new">
-                    <input type="image" src="/static/images/elements/create_account.png" alt="Create account">
+                <form style="float: left; padding-right: 10px" method="GET" action="/account/new">
+                    <input type="image" src="/static/images/elements/create_account.png" alt="Создать аккаунт">
+                </form>
+                <form style="float: left" method="GET" action="/account/login">
+                    <input type="image" src="/static/images/elements/account_enter.png" alt="Авторизироватся">
                 </form>
             </div>
         </div>
