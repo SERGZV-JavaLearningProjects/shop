@@ -23,7 +23,17 @@
                 </p>
             </div>
 
-            <div class="center_frame"></div>
+            <div class="center_frame">
+                <form style="float: left" method="GET" action="/product/category/3d-printers">
+                    <input type="image" src="/static/images/elements/exit.png" alt="Категория принтеров">
+                </form>
+                <form style="float: left" method="GET" action="/product/category/3d-scanners">
+                    <input type="image" src="/static/images/elements/exit.png" alt="Категория сканеров">
+                </form>
+                <form style="float: left" method="GET" action="/product/category/plastic-threads">
+                    <input type="image" src="/static/images/elements/exit.png" alt="Категория пластиковых нитей">
+                </form>
+            </div>
         </main>
 
         <footer th:insert="~{other/fragments :: footer}" style="margin-top: auto;" ></footer>

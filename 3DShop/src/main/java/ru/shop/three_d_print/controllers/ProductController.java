@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import ru.shop.three_d_print.Enums.ProductCategory;
 import ru.shop.three_d_print.entities.Bundle;
 import ru.shop.three_d_print.entities.Product;
 import ru.shop.three_d_print.search.Search;
@@ -20,6 +21,32 @@ public class ProductController
     ProductService productService;
 
     public ProductController(ProductService productService) { this.productService = productService; }
+
+    @GetMapping("/category/{category}")
+    public String getCategory(@PathVariable String category)
+    {
+        var enumCategory = ProductCategory.GetCategoryByArgument(category);
+
+        switch (enumCategory)
+        {
+            case PRINTERS:
+                LoadImagesForCategory(ProductCategory.PRINTERS);
+                break;
+            case SCANNERS:
+                LoadImagesForCategory(ProductCategory.SCANNERS);
+                break;
+            case PLASTIC_THREADS:
+                LoadImagesForCategory(ProductCategory.PLASTIC_THREADS);
+                break;
+        }
+
+        return "product/category";
+    }
+
+    private void LoadImagesForCategory(ProductCategory category)
+    {
+
+    }
 
     @GetMapping("/{id}")
     public String showProduct(@PathVariable Long id, Model model)
