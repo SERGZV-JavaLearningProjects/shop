@@ -9,6 +9,7 @@ import org.springframework.web.server.ResponseStatusException;
 import ru.shop.three_d_print.Enums.ProductCategory;
 import ru.shop.three_d_print.entities.Bundle;
 import ru.shop.three_d_print.entities.Product;
+import ru.shop.three_d_print.entities.ProductPreview;
 import ru.shop.three_d_print.search.Search;
 import ru.shop.three_d_print.service.ProductService;
 
@@ -23,29 +24,25 @@ public class ProductController
     public ProductController(ProductService productService) { this.productService = productService; }
 
     @GetMapping("/category/{category}")
-    public String getCategory(@PathVariable String category)
+    public String getCategory(@PathVariable String category, Model model)
     {
-        var enumCategory = ProductCategory.GetCategoryByArgument(category);
+        var enumCategory = ProductCategory.getCategoryByArgument(category);
+        List<Product> products = productService.findAllWithCategory(enumCategory);
 
-        switch (enumCategory)
+        Search search = new Search();
+        List<ProductPreview> previews = new ArrayList<>();
+        for (var product : products)
         {
-            case PRINTERS:
-                LoadImagesForCategory(ProductCategory.PRINTERS);
-                break;
-            case SCANNERS:
-                LoadImagesForCategory(ProductCategory.SCANNERS);
-                break;
-            case PLASTIC_THREADS:
-                LoadImagesForCategory(ProductCategory.PLASTIC_THREADS);
-                break;
+            String imageName = search.getFirstFileNameInDirectory("static/images/products/" + product.getId());
+            String address = "/static/images/products/" + product.getId() + "/" + imageName;
+            ProductPreview preview = new ProductPreview(address, product.getName(), product.getPrice());
+            previews.add(preview);
         }
 
+        model.addAttribute("categoryName", enumCategory.getViewName());
+        model.addAttribute("previews", previews);
+
         return "product/category";
-    }
-
-    private void LoadImagesForCategory(ProductCategory category)
-    {
-
     }
 
     @GetMapping("/{id}")

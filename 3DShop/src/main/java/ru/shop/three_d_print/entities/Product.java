@@ -1,5 +1,7 @@
 package ru.shop.three_d_print.entities;
 
+import ru.shop.three_d_print.Enums.ProductCategory;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,6 +13,7 @@ public class Product
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private ProductCategory category;
     private String color;
     private float price;
     private String description;

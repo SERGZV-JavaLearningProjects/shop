@@ -3,40 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>3d_shop</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/common/styles.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/main/main.css">
 </head>
 <body style="margin: 0">
     <div class="page">
         <header th:insert="~{other/fragments :: header}"></header>
 
-            <main style="margin-left: 10%; margin-right: 10%;">
-            <h2> Welcome! </h2>
-            <button>Text</button>
-            <div>
-                <p>
-                    ipsum dolor sit amet, consectetuer adipiscing elit, sed diem
-                    nonummy nibh euismod tincidunt ut lacreet dolore magna aliguam erat volutpat.
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diem
-                    nonummy nibh euismod tincidunt ut lacreet dolore magna aliguam erat volutpat.
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diem
-                    nonummy nibh euismod tincidunt ut lacreet dolore magna aliguam erat volutpat.
-                </p>
+        <main style="margin-left: 10%; margin-right: 10%;">
+
+            <div class="main_greeting_text">
+                Добро пожаловать в мой магазин 3д печати на котором я учусь писать Background и Foreground сайтов.
             </div>
 
-            <div class="center_frame">
-                <form style="float: left" method="GET" action="/product/category/3d-printers">
-                    <input type="image" src="/static/images/elements/exit.png" alt="Категория принтеров">
+            <div class="main_page_center_frame">
+                <form class="category_block" style="background: #81d4fa" method="GET" action="/product/category/3d-printer">
+                    <span class="category_title" th:text="${printer}">Принтеры</span>
+                    <input type="image" src="/static/images/elements/printer.png" alt="Категория принтеров">
                 </form>
-                <form style="float: left" method="GET" action="/product/category/3d-scanners">
-                    <input type="image" src="/static/images/elements/exit.png" alt="Категория сканеров">
+                <form class="category_block" style="background: #BBFFBB" method="GET" action="/product/category/3d-scanner">
+                    <span class="category_title" th:text="${scanner}">Сканеры</span>
+                    <input type="image" src="/static/images/elements/scanner.png" alt="Категория сканеров">
                 </form>
-                <form style="float: left" method="GET" action="/product/category/plastic-threads">
-                    <input type="image" src="/static/images/elements/exit.png" alt="Категория пластиковых нитей">
+                <form class="category_block" style="background: #EBD3F8" method="GET" action="/product/category/consumable">
+                    <span class="category_title" th:text="${consumable}">Расходные материалы</span>
+                    <input type="image" src="/static/images/elements/consumable.png" alt="Категория расходных материалов">
                 </form>
             </div>
         </main>
 
-        <footer th:insert="~{other/fragments :: footer}" style="margin-top: auto;" ></footer>
+        <footer th:insert="~{other/fragments :: footer}" style="margin-top: auto;"></footer>
     </div>
 </body>
 </html>

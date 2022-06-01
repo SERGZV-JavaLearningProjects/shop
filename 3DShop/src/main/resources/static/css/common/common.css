@@ -28,13 +28,6 @@ h2{font-weight: 300}
     top: 50%;
     transform: translate(-50%, -50%);
 }
-.center_frame
-{
-    width:100%;
-    height:800px;
-    margin: 10px 0;
-    border:1px solid var(--blue-two);
-}
 .large_text
 {
     font-size: 17px;

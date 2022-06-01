@@ -136,8 +136,8 @@ public class UserService implements UserDetailsService
         if(user.getPassword().length() < 8 || user.getPassword().length() > 40)
             checkResult.add(new ObjectError
             (
-                    "password",
-                    "Password length must be between 8 and 40 letters"
+                "password",
+                "Password length must be between 8 and 40 letters"
             ));
 
         return checkResult;

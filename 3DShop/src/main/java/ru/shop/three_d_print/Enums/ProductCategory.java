@@ -1,29 +1,52 @@
 package ru.shop.three_d_print.Enums;
 
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
 public enum ProductCategory
 {
-    PRINTERS("3d-printers"),
-    SCANNERS("3d-scanners"),
-    PLASTIC_THREADS("plastic-threads");
+    PRINTER("3d-printer"),
+    SCANNER("3d-scanner"),
+    CONSUMABLE("consumable");
 
-    private String category;
+    private final String workName;
 
     ProductCategory(String category)
     {
-        this.category = category;
+        this.workName = category;
     }
 
-    public static ProductCategory GetCategoryByArgument(String category)
-    {
-        Map<String, ProductCategory > enumMap = new HashMap<>();
-        enumMap.put(PRINTERS.category, PRINTERS);
-        enumMap.put(SCANNERS.category, SCANNERS);
-        enumMap.put(PLASTIC_THREADS.category, PLASTIC_THREADS);
+    public String getWorkName() { return workName; }
 
-        return enumMap.get(category);
+    public static ProductCategory getCategoryByArgument(String category)
+    {
+        Map<String, ProductCategory> map = new HashMap<>();
+        map.put(PRINTER.workName, PRINTER);
+        map.put(SCANNER.workName, SCANNER);
+        map.put(CONSUMABLE.workName, CONSUMABLE);
+
+        return map.get(category);
+    }
+
+    public String getViewName()
+    {
+        Map<String, String> map = new HashMap<>();
+        map.put(PRINTER.name(), "3D Принтеры");
+        map.put(SCANNER.name(), "3D Сканеры");
+        map.put(CONSUMABLE.name(), "Расходные материалы");
+
+        return map.get(this.name());
+    }
+
+    // This method is needed in case someone wants to swap the enum in places,
+    // the same number for this enum remains in the database
+    public static int getDatabaseId(ProductCategory category)
+    {
+        Map<String, Integer> map = new HashMap<>();
+        map.put(PRINTER.name(), 0);
+        map.put(SCANNER.name(), 1);
+        map.put(CONSUMABLE.name(), 2);
+
+        return map.get(category.name());
     }
 }
