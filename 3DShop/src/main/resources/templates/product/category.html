@@ -16,9 +16,9 @@
                 <p class="category_title" th:text="${categoryName}">Имя категории</p>
             </div>
 
-            <div class="category_page_center_frame" th:each="preview : ${previews}">
+            <div class="category_page_center_frame">
 
-                <div style="width: 200px; height: 200px">
+                <div style="width: 200px; height: 200px" th:each="preview : ${previews}">
                     <input style="width: 100%" type="image" th:src="${preview.getImageAdress()}">
                 </div>
 
