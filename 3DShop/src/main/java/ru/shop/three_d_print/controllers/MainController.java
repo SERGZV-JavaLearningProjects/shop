@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.shop.three_d_print.Enums.ProductCategory;
+import ru.shop.three_d_print.enums.ProductCategory;
 import ru.shop.three_d_print.service.PaidOrderService;
 import ru.shop.three_d_print.service.ProductService;
 import ru.shop.three_d_print.service.UserService;

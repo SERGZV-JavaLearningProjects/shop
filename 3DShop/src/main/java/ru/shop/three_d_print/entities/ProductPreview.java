@@ -4,9 +4,9 @@ public class ProductPreview
 {
     private final String imageAddress;
     private final String name;
-    private final float price;
+    private final String price;
 
-    public ProductPreview(String image, String name, float price)
+    public ProductPreview(String image, String name, String price)
     {
         this.imageAddress = image;
         this.name = name;
@@ -15,5 +15,5 @@ public class ProductPreview
 
     public String getImageAdress() { return imageAddress; }
     public String getName() { return name; }
-    public float getPrice() { return price; }
+    public String getPrice() { return price; }
 }

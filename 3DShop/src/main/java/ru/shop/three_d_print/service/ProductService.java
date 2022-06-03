@@ -1,7 +1,7 @@
 package ru.shop.three_d_print.service;
 
 import org.springframework.stereotype.Service;
-import ru.shop.three_d_print.Enums.ProductCategory;
+import ru.shop.three_d_print.enums.ProductCategory;
 import ru.shop.three_d_print.entities.Product;
 import ru.shop.three_d_print.repository.ProductRepository;
 

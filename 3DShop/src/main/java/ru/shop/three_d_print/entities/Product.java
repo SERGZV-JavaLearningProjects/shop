@@ -1,6 +1,6 @@
 package ru.shop.three_d_print.entities;
 
-import ru.shop.three_d_print.Enums.ProductCategory;
+import ru.shop.three_d_print.enums.ProductCategory;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,7 +15,7 @@ public class Product
     private String name;
     private ProductCategory category;
     private String color;
-    private float price;
+    private int price;
     private String description;
     @Transient
     private List<String> imageLinks;
@@ -32,9 +32,9 @@ public class Product
 
     public void setColor(String color) { this.color = color; }
 
-    public float getPrice() { return price; }
+    public int getPrice() { return price; }
 
-    public void setPrice(float price) { this.price = price; }
+    public void setPrice(int price) { this.price = price; }
 
     public String getDescription() { return description; }
 

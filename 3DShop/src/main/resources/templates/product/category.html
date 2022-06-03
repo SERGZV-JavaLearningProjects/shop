@@ -13,16 +13,26 @@
         <main style="margin-left: 10%; margin-right: 10%;">
 
             <div style="padding-top: 10px; font-size: 20px; display: flex; justify-content: center">
-                <p class="category_title" th:text="${categoryName}">Имя категории</p>
+                <p class="category_page_title" th:text="${categoryName}"></p>
             </div>
 
-            <div class="category_page_center_frame">
+            <div class="category_page_center_frame_grid">
 
-                <div style="width: 200px; height: 200px" th:each="preview : ${previews}">
-                    <input style="width: 100%" type="image" th:src="${preview.getImageAdress()}">
+                <div class="category_page_product_frame" th:each="preview : ${previews}">
+                    <p class="category_page_product_name_text" th:text="${preview.getName()}"></p>
+                    <input style="max-width: 100%; max-height: 50%;" type="image" th:src="${preview.getImageAdress()}">
+                    <p class="category_page_price_text" th:text="${preview.getPrice()}"></p>
                 </div>
 
             </div>
+
+<!--            <div class="category_page_center_frame">-->
+
+<!--                <div style="width: 25%" th:each="preview : ${previews}">-->
+<!--                    <input style="width: 100%" type="image" th:src="${preview.getImageAdress()}">-->
+<!--                </div>-->
+
+<!--            </div>-->
 
         </main>
 

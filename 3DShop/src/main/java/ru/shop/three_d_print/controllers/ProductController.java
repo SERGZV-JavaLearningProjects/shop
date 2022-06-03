@@ -6,10 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import ru.shop.three_d_print.Enums.ProductCategory;
+import ru.shop.three_d_print.enums.ProductCategory;
 import ru.shop.three_d_print.entities.Bundle;
 import ru.shop.three_d_print.entities.Product;
 import ru.shop.three_d_print.entities.ProductPreview;
+import ru.shop.three_d_print.formatting.FormatText;
 import ru.shop.three_d_print.search.Search;
 import ru.shop.three_d_print.service.ProductService;
 
@@ -35,7 +36,8 @@ public class ProductController
         {
             String imageName = search.getFirstFileNameInDirectory("static/images/products/" + product.getId());
             String address = "/static/images/products/" + product.getId() + "/" + imageName;
-            ProductPreview preview = new ProductPreview(address, product.getName(), product.getPrice());
+            var formattedPrice = FormatText.formatIntToViewPrice(product.getPrice());
+            ProductPreview preview = new ProductPreview(address, product.getName(), formattedPrice);
             previews.add(preview);
         }
 
