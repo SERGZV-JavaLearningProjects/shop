@@ -37,7 +37,7 @@ public class ProductController
             String imageName = search.getFirstFileNameInDirectory("static/images/products/" + product.getId());
             String address = "/static/images/products/" + product.getId() + "/" + imageName;
             var formattedPrice = FormatText.formatIntToViewPrice(product.getPrice());
-            ProductPreview preview = new ProductPreview(address, product.getName(), formattedPrice);
+            ProductPreview preview = new ProductPreview(address, product.getName(), formattedPrice, product.getId());
             previews.add(preview);
         }
 

@@ -18,21 +18,13 @@
 
             <div class="category_page_center_frame_grid">
 
-                <div class="category_page_product_frame" th:each="preview : ${previews}">
+                <form class="category_page_product_frame" th:each="preview : ${previews}" method="GET" th:action="@{/product/{id}(id=${preview.getId()})}">
                     <p class="category_page_product_name_text" th:text="${preview.getName()}"></p>
                     <input style="max-width: 100%; max-height: 50%;" type="image" th:src="${preview.getImageAdress()}">
                     <p class="category_page_price_text" th:text="${preview.getPrice()}"></p>
-                </div>
+                </form>
 
             </div>
-
-<!--            <div class="category_page_center_frame">-->
-
-<!--                <div style="width: 25%" th:each="preview : ${previews}">-->
-<!--                    <input style="width: 100%" type="image" th:src="${preview.getImageAdress()}">-->
-<!--                </div>-->
-
-<!--            </div>-->
 
         </main>
 
