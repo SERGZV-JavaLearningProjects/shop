@@ -16,15 +16,20 @@
         <div class="item_window">
             <div class="first_column">
 
-                <img id="main_product_image" th:src="${bundle.getProduct().getImageLinks().get(0)}" alt="Main image" width="100%" height="400px">
-
-                <div style="position: relative; background: #c5e384; width: 430px; height: 120px; top: 10px; left: 10px; display: flex; overflow: auto">
-
-                    <div th:each="image : ${bundle.getProduct().getImageLinks()}">
-                        <input type="image" th:src="${image}" alt="miniature" onclick="setNewImage(this)" style="width: 80px; height: 80px; margin: 3px">
-                    </div>
-
+                <div class="product_first_column_up_div">
+                    <img class="product_main_image" id="main_product_image" th:src="${bundle.getProduct().getImageLinks().get(0)}" alt="Main image">
                 </div>
+
+                <div class="product_first_column_bottom_div">
+                    <div class="product_image_selector">
+                        <div th:each="image : ${bundle.getProduct().getImageLinks()}">
+                            <div class="product_miniature_image_container">
+                                <input class="product_miniature_input" type="image" th:src="${image}" alt="miniature" onclick="setNewImage(this)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <div class="second_column">
@@ -37,19 +42,19 @@
             </div>
 
             <div class="third_column">
-                <h1 th:text="'$ ' + ${bundle.getProduct().getPrice()}"></h1>
-                <form th:method="POST" action="/product/add-to-cart" th:object="${bundle}" class="product-form">
+                <h1 th:text="${bundle.getProduct().getViewPrice()}"></h1>
+                <form th:method="POST" action="/product/add-to-cart" th:object="${bundle}" class="product_form">
 
                     <label style="font-size: 18px">Quantity</label>
-                    <input type="number" min="1" th:value="${bundle.getQuantity()}" class="product-form-quantity-field">
+                    <input type="number" min="1" th:value="${bundle.getQuantity()}" class="product_form_quantity_field">
 
-                    <input type="image" src="/static/images/elements/green_button.png" alt="submit" class="product-add-to-cart-button">
-                    <p class="product-add-to-cart-button-overlay">Add to cart</p>
+                    <input type="image" src="/static/images/elements/green_button.png" alt="submit" class="product_add_to_cart_button">
+                    <p class="product_add_to_cart_button_overlay">Add to cart</p>
                 </form>
             </div>
         </div>
     </main>
 
-    <footer th:insert="~{other/fragments :: footer}" style="margin-top: auto;" ></footer>
+    <footer th:insert="~{other/fragments :: footer}" style="margin-top: auto;"></footer>
 </div>
 </body>

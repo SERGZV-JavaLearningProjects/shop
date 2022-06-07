@@ -1,6 +1,7 @@
 package ru.shop.three_d_print.entities;
 
 import ru.shop.three_d_print.enums.ProductCategory;
+import ru.shop.three_d_print.formatting.FormatText;
 
 import javax.persistence.*;
 import java.util.List;
@@ -33,6 +34,8 @@ public class Product
     public void setColor(String color) { this.color = color; }
 
     public int getPrice() { return price; }
+
+    public String getViewPrice() { return FormatText.formatIntToViewPrice(price); }
 
     public void setPrice(int price) { this.price = price; }
 

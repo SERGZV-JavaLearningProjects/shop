@@ -36,8 +36,7 @@ public class ProductController
         {
             String imageName = search.getFirstFileNameInDirectory("static/images/products/" + product.getId());
             String address = "/static/images/products/" + product.getId() + "/" + imageName;
-            var formattedPrice = FormatText.formatIntToViewPrice(product.getPrice());
-            ProductPreview preview = new ProductPreview(address, product.getName(), formattedPrice, product.getId());
+            ProductPreview preview = new ProductPreview(address, product.getName(), product.getViewPrice(), product.getId());
             previews.add(preview);
         }
 
@@ -51,7 +50,7 @@ public class ProductController
     public String showProduct(@PathVariable Long id, Model model)
     {
         Optional<Product> product = productService.findById(id);
-        product.orElseThrow(() ->  new ResponseStatusException(HttpStatus.NOT_FOUND, "Такой продукт не был найден"));
+        product.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Такой продукт не был найден"));
 
         Search search = new Search();
         List<String> imageNames = search.getDirectoryFileNames("static/images/products/" + id);
