@@ -64,24 +64,14 @@ public class UserService implements UserDetailsService
         return checkResult;
     }
 
-    public void TestOrder()
+    public void addOrder(Bundle bundle)
     {
-        User user = userRepository.findById(27L).get();
+        var userName = getCurrentUsername();
+        User user = (User)loadUserByUsername(userName);
 
-        Optional<Product> product1 = productService.findById(1L);
-        Optional<Product> product2 = productService.findById(2L);
-
-        Bundle bundle1 = new Bundle(product1.get(), 5);
-        Bundle bundle2 = new Bundle(product2.get(), 2);
-
-        UserOrder order = new UserOrder();
-
-        List<Bundle> bundles = new ArrayList<>();
-        bundles.add(bundle1);
-        bundles.add(bundle2);
-
-        order.setBundles(bundles);
-
+        var order = user.getOrder();
+        if (order == null) order = new UserOrder();
+        order.addBundle(bundle);
         user.setOrder(order);
 
         userRepository.save(user);

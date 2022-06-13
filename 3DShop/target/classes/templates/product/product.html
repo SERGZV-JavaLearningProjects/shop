@@ -12,6 +12,16 @@
 <div class="page" style="margin: 0">
     <header th:insert="~{other/fragments :: header}"></header>
 
+    <a href="#openModal">Открыть модальное окно</a>
+
+    <div class="product_modal_window" id="openModal">
+        <div>
+            <a class="close" href="#close" title="Закрыть">X</a>
+            <h2>Добавлено</h2>
+            <p>Товар был добавлен в вашу корзину, продолжить покупки или передти к корзине?</p>
+        </div>
+    </div>
+
     <main style="margin-left: 17%; margin-right: 17%;">
         <div class="item_window">
             <div class="first_column">
@@ -43,10 +53,11 @@
 
             <div class="third_column">
                 <h1 th:text="${bundle.getProduct().getViewPrice()}"></h1>
-                <form th:method="POST" action="/product/add-to-cart" th:object="${bundle}" class="product_form">
 
+                <form class="product_form" method="POST" th:action="@{/product/{id}(id=${bundle.getProduct().getId()})}">
                     <label style="font-size: 18px">Quantity</label>
-                    <input type="number" min="1" th:value="${bundle.getQuantity()}" class="product_form_quantity_field">
+
+                    <input class="product_form_quantity_field" name="quantity" type="number" value="1" min="1">
 
                     <input type="image" src="/static/images/elements/green_button.png" alt="submit" class="product_add_to_cart_button">
                     <p class="product_add_to_cart_button_overlay">Add to cart</p>

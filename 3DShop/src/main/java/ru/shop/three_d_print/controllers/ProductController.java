@@ -1,6 +1,7 @@
 package ru.shop.three_d_print.controllers;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,9 +11,9 @@ import ru.shop.three_d_print.enums.ProductCategory;
 import ru.shop.three_d_print.entities.Bundle;
 import ru.shop.three_d_print.entities.Product;
 import ru.shop.three_d_print.entities.ProductPreview;
-import ru.shop.three_d_print.formatting.FormatText;
 import ru.shop.three_d_print.search.Search;
 import ru.shop.three_d_print.service.ProductService;
+import ru.shop.three_d_print.service.UserService;
 
 import java.util.*;
 
@@ -20,9 +21,14 @@ import java.util.*;
 @RequestMapping("/product")
 public class ProductController
 {
+    UserService userService;
     ProductService productService;
 
-    public ProductController(ProductService productService) { this.productService = productService; }
+    public ProductController(UserService userService, ProductService productService)
+    {
+        this.userService = userService;
+        this.productService = productService;
+    }
 
     @GetMapping("/category/{category}")
     public String getCategory(@PathVariable String category, Model model)
@@ -49,34 +55,45 @@ public class ProductController
     @GetMapping("/{id}")
     public String showProduct(@PathVariable Long id, Model model)
     {
-        Optional<Product> product = productService.findById(id);
+        Bundle bundle = buildBundle(id);
+        model.addAttribute("bundle", bundle);
+        model.addAttribute("openModal", false);
+
+        return "product/product";
+    }
+
+    @PostMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public String addToCart(@PathVariable Long id, @RequestParam int quantity, Model model)
+    {
+        Bundle bundle = buildBundle(id);
+        bundle.setQuantity(quantity);
+        model.addAttribute("bundle", bundle);
+        model.addAttribute("openModal", true);
+
+        userService.addOrder(bundle);
+
+        return "product/product";
+    }
+
+    private Bundle buildBundle(Long productId)
+    {
+        Optional<Product> product = productService.findById(productId);
         product.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Такой продукт не был найден"));
 
         Search search = new Search();
-        List<String> imageNames = search.getDirectoryFileNames("static/images/products/" + id);
+        List<String> imageNames = search.getDirectoryFileNames("static/images/products/" + productId);
         List<String> imageLinks = new ArrayList<>();
 
         if(imageNames.size() > 0)
         {
             for (String imageName : imageNames)
-                imageLinks.add("/static/images/products/" + id + "/" + imageName);
+                imageLinks.add("/static/images/products/" + productId + "/" + imageName);
         }
         else imageLinks.add("/static/images/elements/no-image.jpg");
 
         product.get().setImageLinks(imageLinks);
 
-        Bundle bundle = new Bundle(product.get(), 1);
-        model.addAttribute("bundle", bundle);
-
-        return "product/product";
-    }
-
-    @PostMapping("/add-to-cart")
-    public String addToCart(@ModelAttribute Bundle bundle, Model model)
-    {
-        System.out.println("Метод вызван");
-
-        model.addAttribute("bundle", bundle);
-        return "product/product";
+        return new Bundle(product.get(), 1);
     }
 }
