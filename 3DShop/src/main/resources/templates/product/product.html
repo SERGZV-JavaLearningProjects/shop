@@ -7,15 +7,16 @@
     <link rel="stylesheet" type="text/css" href="/static/css/common/common.css">
     <link rel="stylesheet" type="text/css" href="/static/css/product/product.css">
     <script type="text/javascript" src="/static/js/product/product.js"></script>
+    <script type="text/javascript" src="/static/js/product/popup.js"></script>
 </head>
 <body style="margin: 0">
 <div class="page" style="margin: 0">
     <header th:insert="~{other/fragments :: header}"></header>
 
 
-    <a href="#openModal">Открыть модальное окно</a>
+    <input type="hidden" id="openModalValue" th:value="${openModalValue}">
 
-    <div class="product_modal_window" id="openModal">
+    <div class="product_modal_window" id="modalWindow">
         <div>
             <a class="close" href="#close" title="Закрыть">X</a>
             <h2>Добавлено</h2>
@@ -25,7 +26,7 @@
 
 
 
-<!--    <div th:if="${openModal}">-->
+<!--    <div th:if="${openModalValue}">-->
 <!--        <a href="#openModal">Открыть модальное окно</a>-->
 
 <!--        <div class="product_modal_window" id="openModal">-->
@@ -36,8 +37,6 @@
 <!--            </div>-->
 <!--        </div>-->
 <!--    </div>-->
-
-
 
 
     <main style="margin-left: 17%; margin-right: 17%;">
@@ -85,5 +84,7 @@
     </main>
 
     <footer th:insert="~{other/fragments :: footer}" style="margin-top: auto;"></footer>
+    <script> TogglePopup(); </script>
 </div>
+
 </body>

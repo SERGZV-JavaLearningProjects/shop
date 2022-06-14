@@ -57,7 +57,7 @@ public class ProductController
     {
         Bundle bundle = buildBundle(id);
         model.addAttribute("bundle", bundle);
-        model.addAttribute("openModal", false);
+        model.addAttribute("openModalValue", false);
 
         return "product/product";
     }
@@ -69,7 +69,7 @@ public class ProductController
         Bundle bundle = buildBundle(id);
         bundle.setQuantity(quantity);
         model.addAttribute("bundle", bundle);
-        model.addAttribute("openModal", true);
+        model.addAttribute("openModalValue", true);
 
         userService.addOrder(bundle);
 
