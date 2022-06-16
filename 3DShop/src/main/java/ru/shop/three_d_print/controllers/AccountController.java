@@ -40,6 +40,9 @@ public class AccountController
         this.authenticationManager = authenticationManager;
     }
 
+    @GetMapping("/cart")
+    public String getCart() { return "account/cart"; }
+
     @GetMapping("/login")
     public String getLogin() { return "account/login"; }
 
