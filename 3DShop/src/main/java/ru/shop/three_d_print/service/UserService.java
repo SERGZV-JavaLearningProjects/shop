@@ -81,6 +81,16 @@ public class UserService implements UserDetailsService
     {
         User user = userRepository.findByUsername(username);
         if(user == null) throw new UsernameNotFoundException("User not found");
+
+        List<Bundle> bundles = user.getOrder().getBundles();
+        if(user.getOrder().getBundles().size() > 0)
+        {
+//            for ( : bundles)
+//            {
+//
+//            }
+        }
+
         return user;
     }
 
@@ -122,7 +132,9 @@ public class UserService implements UserDetailsService
     public UserOrder getOrder()
     {
         var userName = getCurrentUsername();
-        User user = (User) loadUserByUsername(userName);
+        User user = (User)loadUserByUsername(userName);
+
+
 
         return user.getOrder();
     }

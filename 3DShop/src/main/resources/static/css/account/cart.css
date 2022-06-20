@@ -5,31 +5,30 @@
     margin: 10px 0;
     border:1px solid var(--blue-two);
 }
-.cart_window {display: flex;}
+.cart_window
+{
+    display: flex;
+    justify-content: space-between;
+}
 .cart_bundles_window
 {
-    flex-grow: 7
+    width: 75%;
 }
 .cart_buy_window
 {
-    flex-grow: 2;
+    background: #81d4fa;
+    width: 20%;
+    height: 200px;
 }
 .cart_bundle_block
 {
+    background: #2d54f5;
     width: 100%;
     height: 200px;
-    background: #2d54f5;
 }
-.cart_bundle_title
-{
-    position: absolute;
-    padding: 10px;
-}
+.cart_bundle_title {padding: 10px 20px;}
 .cart_bundle_border
 {
-    position: absolute;
     border-bottom: 1px solid var(--underline-text-color);
-    padding: 20px;
-    /*margin: 0 10px 0 10px;*/
-    width: 80%;
+    margin: 0 20px;
 }

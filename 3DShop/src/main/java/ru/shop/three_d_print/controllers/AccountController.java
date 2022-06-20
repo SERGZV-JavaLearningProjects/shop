@@ -44,7 +44,13 @@ public class AccountController
     @PreAuthorize("hasRole('ROLE_USER')")
     public String getCart(Model model)
     {
-        var test = userService.getOrder();
+
+        // тестовый код
+        var order = userService.getOrder();
+        var product = order.getBundles().get(0).getProduct();
+        var test2 = order.getBundles().get(0).getProduct().getImageLinks().get(0);
+        //
+
         model.addAttribute("userOrder", userService.getOrder());
         return "account/cart";
     }

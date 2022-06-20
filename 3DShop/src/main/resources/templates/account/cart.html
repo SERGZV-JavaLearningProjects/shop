@@ -19,9 +19,13 @@
                 <div class="cart_window" th:if="${userOrder.getBundles().size() > 0}">
                     <div class="cart_bundles_window">
                         <div class="cart_bundle_block" th:each="bundle : ${userOrder.getBundles()}">
-<!--                            <span th:text="${bundle.getName()}"></span>-->
                             <h2 class="cart_bundle_title" th:text="${bundle.getName()}"></h2>
                             <p class="cart_bundle_border"></p>
+
+
+                            <img class="product_main_image" id="main_product_image" th:src="${bundle.getProduct().getImageLinks().get(0)}" alt="Main image">
+
+<!--                            <img th:src="${bundle.getProduct().getImageLinks().get(0)}">-->
                         </div>
                     </div>
                     <div class="cart_buy_window">
