@@ -64,19 +64,6 @@ public class UserService implements UserDetailsService
         return checkResult;
     }
 
-    public void addOrder(Bundle bundle)
-    {
-        var userName = getCurrentUsername();
-        User user = (User)loadUserByUsername(userName);
-
-        var order = user.getOrder();
-        if (order == null) order = new UserOrder();
-        order.addBundle(bundle);
-        user.setOrder(order);
-
-        userRepository.save(user);
-    }
-
     public String getCurrentUsername()
     {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -117,6 +104,27 @@ public class UserService implements UserDetailsService
             return true;
         }
         return false;
+    }
+
+    public void addOrder(Bundle bundle)
+    {
+        var userName = getCurrentUsername();
+        User user = (User)loadUserByUsername(userName);
+
+        var order = user.getOrder();
+        if (order == null) order = new UserOrder();
+        order.addBundle(bundle);
+        user.setOrder(order);
+
+        userRepository.save(user);
+    }
+
+    public UserOrder getOrder()
+    {
+        var userName = getCurrentUsername();
+        User user = (User) loadUserByUsername(userName);
+
+        return user.getOrder();
     }
 
     private List<ObjectError> ManualUserValidation(User user)

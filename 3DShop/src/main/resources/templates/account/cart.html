@@ -4,13 +4,31 @@
     <meta charset="UTF-8">
     <title>Cart</title>
     <link rel="stylesheet" type="text/css" href="/static/css/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/account/cart.css">
 </head>
 <body style="margin: 0">
     <div class="page">
         <header th:insert="~{other/fragments :: header}"></header>
 
         <main style="margin-left: 10%; margin-right: 10%;">
+            <div class="cart_center_frame">
 
+                <div style="height: 800px; display: flex; align-items: center; justify-content: center" th:if="${userOrder.getBundles().size() == 0}">
+                    <h1>Ваша корзина пуста</h1>
+                </div>
+                <div class="cart_window" th:if="${userOrder.getBundles().size() > 0}">
+                    <div class="cart_bundles_window">
+                        <div class="cart_bundle_block" th:each="bundle : ${userOrder.getBundles()}">
+<!--                            <span th:text="${bundle.getName()}"></span>-->
+                            <h2 class="cart_bundle_title" th:text="${bundle.getName()}"></h2>
+                            <p class="cart_bundle_border"></p>
+                        </div>
+                    </div>
+                    <div class="cart_buy_window">
+
+                    </div>
+                </div>
+            </div>
         </main>
 
         <footer th:insert="~{other/fragments :: footer}" style="margin-top: auto;"></footer>

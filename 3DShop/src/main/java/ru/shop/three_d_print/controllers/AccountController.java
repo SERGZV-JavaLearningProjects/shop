@@ -41,7 +41,13 @@ public class AccountController
     }
 
     @GetMapping("/cart")
-    public String getCart() { return "account/cart"; }
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public String getCart(Model model)
+    {
+        var test = userService.getOrder();
+        model.addAttribute("userOrder", userService.getOrder());
+        return "account/cart";
+    }
 
     @GetMapping("/login")
     public String getLogin() { return "account/login"; }

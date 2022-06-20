@@ -94,13 +94,3 @@ h2{font-weight: 300}
     padding: 10px 0;
     line-height: 23px;
 }
-.info_frame
-{
-    margin-top: 40px;
-    width: 800px;
-    border:1px solid var(--blue-two);
-    padding: 20px 20px;
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, 0);
-}

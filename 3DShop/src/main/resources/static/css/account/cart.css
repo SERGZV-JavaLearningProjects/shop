@@ -1,0 +1,35 @@
+.cart_center_frame
+{
+    width:100%;
+    min-height: 800px;
+    margin: 10px 0;
+    border:1px solid var(--blue-two);
+}
+.cart_window {display: flex;}
+.cart_bundles_window
+{
+    flex-grow: 7
+}
+.cart_buy_window
+{
+    flex-grow: 2;
+}
+.cart_bundle_block
+{
+    width: 100%;
+    height: 200px;
+    background: #2d54f5;
+}
+.cart_bundle_title
+{
+    position: absolute;
+    padding: 10px;
+}
+.cart_bundle_border
+{
+    position: absolute;
+    border-bottom: 1px solid var(--underline-text-color);
+    padding: 20px;
+    /*margin: 0 10px 0 10px;*/
+    width: 80%;
+}
