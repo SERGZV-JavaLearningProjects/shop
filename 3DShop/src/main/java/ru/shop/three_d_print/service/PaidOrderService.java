@@ -9,7 +9,6 @@ import ru.shop.three_d_print.repository.PaidOrderRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PaidOrderService
@@ -27,11 +26,11 @@ public class PaidOrderService
     public void TestPaidOrder()
     {
         PaidOrder paidOrder = new PaidOrder();
-        Optional<Product> product1 = productService.findById(1L);
-        Optional<Product> product2 = productService.findById(2L);
+        Product product1 = productService.findById(1L);
+        Product product2 = productService.findById(2L);
 
-        PaidBundle bundle1 = new PaidBundle(paidOrder, product1.get(), 2);
-        PaidBundle bundle2 = new PaidBundle(paidOrder, product2.get(), 4);
+        PaidBundle bundle1 = new PaidBundle(paidOrder, product1, 2);
+        PaidBundle bundle2 = new PaidBundle(paidOrder, product2, 4);
 
         List<PaidBundle> bundles = new ArrayList<>();
         bundles.add(bundle1);

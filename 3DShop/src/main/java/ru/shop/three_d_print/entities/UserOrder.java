@@ -12,9 +12,9 @@ public class UserOrder
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")
-    private List<Bundle> bundles = new ArrayList<>();
+    private final List<Bundle> bundles = new ArrayList<>();
 
     public List<Bundle> getBundles() { return bundles; }
 

@@ -55,7 +55,7 @@ public class ProductController
     @GetMapping("/{id}")
     public String showProduct(@PathVariable Long id, Model model)
     {
-        Bundle bundle = buildBundle(id);
+        Bundle bundle = new Bundle(productService.findById(id), 1);
         model.addAttribute("bundle", bundle);
         model.addAttribute("openModalValue", false);
 
@@ -66,34 +66,11 @@ public class ProductController
     @PreAuthorize("hasRole('ROLE_USER')")
     public String addToCart(@PathVariable Long id, @RequestParam int quantity, Model model)
     {
-        Bundle bundle = buildBundle(id);
-        bundle.setQuantity(quantity);
+        Bundle bundle = new Bundle(productService.findById(id), quantity);
         model.addAttribute("bundle", bundle);
         model.addAttribute("openModalValue", true);
-
         userService.addOrder(bundle);
 
         return "product/product";
-    }
-
-    private Bundle buildBundle(Long productId)
-    {
-        Optional<Product> product = productService.findById(productId);
-        product.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Такой продукт не был найден"));
-
-        Search search = new Search();
-        List<String> imageNames = search.getDirectoryFileNames("static/images/products/" + productId);
-        List<String> imageLinks = new ArrayList<>();
-
-        if(imageNames.size() > 0)
-        {
-            for (String imageName : imageNames)
-                imageLinks.add("/static/images/products/" + productId + "/" + imageName);
-        }
-        else imageLinks.add("/static/images/elements/no-image.jpg");
-
-        product.get().setImageLinks(imageLinks);
-
-        return new Bundle(product.get(), 1);
     }
 }

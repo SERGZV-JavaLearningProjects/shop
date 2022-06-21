@@ -1,7 +1,6 @@
 package ru.shop.three_d_print.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -83,13 +82,7 @@ public class UserService implements UserDetailsService
         if(user == null) throw new UsernameNotFoundException("User not found");
 
         List<Bundle> bundles = user.getOrder().getBundles();
-        if(user.getOrder().getBundles().size() > 0)
-        {
-//            for ( : bundles)
-//            {
-//
-//            }
-        }
+        if(bundles.size() > 0) bundles.forEach(bundle -> bundle.getProduct().loadImageLinks());
 
         return user;
     }
@@ -133,8 +126,6 @@ public class UserService implements UserDetailsService
     {
         var userName = getCurrentUsername();
         User user = (User)loadUserByUsername(userName);
-
-
 
         return user.getOrder();
     }

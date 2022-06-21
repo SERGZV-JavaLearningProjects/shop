@@ -20,9 +20,13 @@ public class ProductService
 
     public ProductService(ProductRepository productRepository) { this.productRepository = productRepository; }
 
-    public Optional<Product> findById(Long id)
+    public Product findById(Long id)
     {
-        return productRepository.findById(id);
+        var optionalProduct = productRepository.findById(id);
+        var product = optionalProduct.orElseThrow(NullPointerException::new);
+        product.loadImageLinks();
+
+        return product;
     }
 
     public List<Product> findAllWithCategory(ProductCategory category)

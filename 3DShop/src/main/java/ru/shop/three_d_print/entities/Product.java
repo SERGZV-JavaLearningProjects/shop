@@ -2,8 +2,10 @@ package ru.shop.three_d_print.entities;
 
 import ru.shop.three_d_print.enums.ProductCategory;
 import ru.shop.three_d_print.formatting.FormatText;
+import ru.shop.three_d_print.search.Search;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,7 +21,7 @@ public class Product
     private int price;
     private String description;
     @Transient
-    private List<String> imageLinks;
+    private List<String> imageLinks = new ArrayList<>();;
 
     public Long getId() { return id; }
 
@@ -46,4 +48,17 @@ public class Product
     public List<String> getImageLinks() { return imageLinks; }
 
     public void setImageLinks(List<String> imageLinks) { this.imageLinks = imageLinks; }
+
+    public void loadImageLinks()
+    {
+        Search search = new Search();
+        List<String> imageNames = search.getDirectoryFileNames("static/images/products/" + id);
+
+        if(imageNames.size() > 0)
+        {
+            for (String imageName : imageNames)
+                imageLinks.add("/static/images/products/" + id + "/" + imageName);
+        }
+        else imageLinks.add("/static/images/elements/no-image.jpg");
+    }
 }
