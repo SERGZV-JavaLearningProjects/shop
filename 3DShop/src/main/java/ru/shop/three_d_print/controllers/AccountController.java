@@ -70,21 +70,6 @@ public class AccountController
         return "account/create";
     }
 
-    @GetMapping("/cart")
-    @PreAuthorize("hasRole('ROLE_USER')")
-    public String getCart(Model model)
-    {
-        model.addAttribute("userOrder", userService.getOrder());
-        return "account/cart";
-    }
-
-    @DeleteMapping("/delete-bundle")
-    @PreAuthorize("hasRole('ROLE_USER')")
-    public String deleteBundle()
-    {
-        return "";
-    }
-
     @PostMapping("/created")
     public String getCreated(@ModelAttribute @Valid Account account, BindingResult bindingResult, HttpServletRequest request)
     {

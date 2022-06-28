@@ -20,14 +20,14 @@
                     <p>Эта кнопка удалит товар из корзины, вы действительно хотите удалить товар?</p>
 
                     <div class="small_warning_modal_button_panel">
-                        <form method="POST" action="/account/cart">
+                        <form th:method="DELETE" action="/cart/delete-bundle">
                             <input class="small_warning_modal_button" type="image" src="/static/images/elements/product/product/blue_button.png"
-                                   alt="Передтив корзину" onclick="PopupCloseById('modalWindow')">
+                                   alt="Удалить товар">
                             <p class="small_warning_modal_button_text">Удалить товар</p>
                         </form>
                         <div>
                             <input class="small_warning_modal_button" type="image" src="/static/images/elements/product/product/green_button.png"
-                                   alt="Продолжить покупки" onclick="TogglePopup('false', 'deleteWarningModal')">
+                                   alt="Отмена" onclick="TogglePopup('false', 'deleteWarningModal')">
                             <p class="small_warning_modal_button_text">Отмена</p>
                         </div>
                     </div>
