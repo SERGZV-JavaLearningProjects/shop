@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.ObjectError;
 
 import ru.shop.three_d_print.entities.*;
-import ru.shop.three_d_print.repository.RoleRepository;
 import ru.shop.three_d_print.repository.UserRepository;
 
 import javax.persistence.EntityManager;
@@ -27,23 +26,14 @@ public class UserService implements UserDetailsService
     @PersistenceContext
     private EntityManager em;
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final ProductService productService;
 
     @Autowired
-    public UserService
-    (
-        UserRepository userRepository,
-        RoleRepository roleRepository,
-        BCryptPasswordEncoder bCryptPasswordEncoder,
-        ProductService productService
-    )
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder)
     {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.productService = productService;
     }
 
     public Account newAccount() { return new Account(); }

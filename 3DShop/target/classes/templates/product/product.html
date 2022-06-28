@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <title>Item name</title>
     <link rel="stylesheet" type="text/css" href="/static/css/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/common/small_modal_window.css">
     <link rel="stylesheet" type="text/css" href="/static/css/product/product.css">
     <script type="text/javascript" src="/static/js/product/product.js"></script>
-    <script type="text/javascript" src="/static/js/product/popup.js"></script>
 </head>
 <body style="margin: 0">
 <div class="page" style="margin: 0">
@@ -15,21 +15,22 @@
 
     <main style="margin-left: 17%; margin-right: 17%;">
 
-        <div class="product_modal_window" id="modalWindow">
-            <div>
-                <a class="close" title="Закрыть" onclick="PopupCloseById('modalWindow')" >X</a>
+        <div class="modal_window_root" id="modalWindow">
+            <div class="small_warning_modal">
+                <input type="hidden" id="openModalValue" th:value="${openModalValue}">
+                <a class="small_warning_modal_close_button" title="Закрыть" onclick="PopupCloseById('modalWindow')">X</a>
                 <h2>Добавлено</h2>
                 <p>Товар был добавлен в вашу корзину, продолжить покупки или передти к корзине?</p>
-                <div class="product_popup_button_panel">
+                <div class="small_warning_modal_button_panel">
                     <div>
-                        <input class="product_popup_button" type="image" src="/static/images/elements/product/product/blue_button.png"
+                        <input class="small_warning_modal_button" type="image" src="/static/images/elements/product/product/blue_button.png"
                             alt="Продолжить покупки" onclick="PopupCloseById('modalWindow')">
-                        <p class="product_popup_button_text">Продолжить покупки</p>
+                        <p class="small_warning_modal_button_text">Продолжить покупки</p>
                     </div>
                     <form method="GET" action="/account/cart">
-                        <input class="product_popup_button" type="image" src="/static/images/elements/product/product/green_button.png"
+                        <input class="small_warning_modal_button" type="image" src="/static/images/elements/product/product/green_button.png"
                             alt="Передтив корзину" onclick="PopupCloseById('modalWindow')">
-                        <p class="product_popup_button_text">В корзину</p>
+                        <p class="small_warning_modal_button_text">В корзину</p>
                     </form>
                 </div>
             </div>
@@ -80,8 +81,6 @@
     </main>
 
     <footer th:insert="~{other/fragments :: footer}" style="margin-top: auto;"></footer>
-
-    <input type="hidden" id="openModalValue" th:value="${openModalValue}">
     <script> TogglePopup(); </script>
 </div>
 

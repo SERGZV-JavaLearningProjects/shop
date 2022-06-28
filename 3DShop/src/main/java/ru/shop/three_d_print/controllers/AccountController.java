@@ -40,14 +40,6 @@ public class AccountController
         this.authenticationManager = authenticationManager;
     }
 
-    @GetMapping("/cart")
-    @PreAuthorize("hasRole('ROLE_USER')")
-    public String getCart(Model model)
-    {
-        model.addAttribute("userOrder", userService.getOrder());
-        return "account/cart";
-    }
-
     @GetMapping("/login")
     public String getLogin() { return "account/login"; }
 
@@ -76,6 +68,21 @@ public class AccountController
     {
         model.addAttribute("account", userService.newAccount());
         return "account/create";
+    }
+
+    @GetMapping("/cart")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public String getCart(Model model)
+    {
+        model.addAttribute("userOrder", userService.getOrder());
+        return "account/cart";
+    }
+
+    @DeleteMapping("/delete-bundle")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public String deleteBundle()
+    {
+        return "";
     }
 
     @PostMapping("/created")

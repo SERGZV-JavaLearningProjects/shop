@@ -4,13 +4,37 @@
     <meta charset="UTF-8">
     <title>Cart</title>
     <link rel="stylesheet" type="text/css" href="/static/css/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/common/small_modal_window.css">
     <link rel="stylesheet" type="text/css" href="/static/css/account/cart.css">
+    <script type="text/javascript" src="/static/js/account/cart.js"></script>
 </head>
 <body style="margin: 0">
     <div class="page">
         <header th:insert="~{other/fragments :: header}"></header>
 
         <main style="margin-left: 10%; margin-right: 10%;">
+
+            <div class="modal_window_root" id="deleteWarningModal">
+                <div class="small_warning_modal">
+                    <a class="small_warning_modal_close_button" title="Закрыть" onclick="TogglePopup('false', 'deleteWarningModal')">X</a>
+                    <p>Эта кнопка удалит товар из корзины, вы действительно хотите удалить товар?</p>
+
+                    <div class="small_warning_modal_button_panel">
+                        <form method="POST" action="/account/cart">
+                            <input class="small_warning_modal_button" type="image" src="/static/images/elements/product/product/blue_button.png"
+                                   alt="Передтив корзину" onclick="PopupCloseById('modalWindow')">
+                            <p class="small_warning_modal_button_text">Удалить товар</p>
+                        </form>
+                        <div>
+                            <input class="small_warning_modal_button" type="image" src="/static/images/elements/product/product/green_button.png"
+                                   alt="Продолжить покупки" onclick="TogglePopup('false', 'deleteWarningModal')">
+                            <p class="small_warning_modal_button_text">Отмена</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
             <div class="cart_center_frame">
 
                 <div style="height: 800px; display: flex; align-items: center; justify-content: center" th:if="${userOrder.getBundles().size() == 0}">
@@ -22,10 +46,31 @@
                             <h2 class="cart_bundle_title" th:text="${bundle.getName()}"></h2>
                             <p class="cart_bundle_border"></p>
 
+                            <div class="cart_bundle_main_flex_box">
+                                <div class="cart_bundle_product_image_box">
+                                    <img class="cart_bundle_product_image" th:src="${bundle.getProduct().getImageLinks().get(0)}" alt="Product image">
 
-                            <img class="product_main_image" id="main_product_image" th:src="${bundle.getProduct().getImageLinks().get(0)}" alt="Main image">
+                                    <div class="cart_bundle_text_box">
+                                        <p th:text="${bundle.getProduct().getDescription()}" >Тестовый текст</p>
+                                    </div>
+                                </div>
 
-<!--                            <img th:src="${bundle.getProduct().getImageLinks().get(0)}">-->
+                                <div class="cart_bundle_control_panel">
+
+                                <input class="cart_control_panel_bean_button" onclick="TogglePopup('true', 'deleteWarningModal')"
+                                       type="image" src="/static/images/elements/account/cart/bin.png">
+
+                                    <div class="cart_control_panel_add_subtract">
+
+<!--                                        эта кнопка удалит товар из корзины-->
+<!--                                        <input type="image" src="">-->
+<!--                                        <a class="close" title="Закрыть" onclick="PopupCloseById('modalWindow')">X</a>-->
+
+
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                     <div class="cart_buy_window">

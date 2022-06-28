@@ -32,3 +32,50 @@
     border-bottom: 1px solid var(--underline-text-color);
     margin: 0 20px;
 }
+.cart_bundle_main_flex_box
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.cart_bundle_product_image_box
+{
+    width: 80%;
+    height: 120px;
+    padding: 10px 20px 0;
+    display: flex;
+}
+.cart_bundle_product_image
+{
+    width: 120px;
+    height: 120px;
+}
+.cart_bundle_text_box
+{
+    width: 80%;
+    height: 120px;
+    padding: 0 0 0 10px;
+}
+.cart_bundle_control_panel
+{
+    width: 100px;
+    height: 120px;
+    padding: 0 25px 0 0;
+}
+.cart_control_panel_bean_button
+{
+    position: relative;
+    width: 25px;
+    height: 25px;
+    left: 75px;
+    top: 15px;
+}
+.cart_control_panel_add_subtract
+{
+    position: relative;
+    top: 15px;
+    width: 100px;
+    height: 40px;
+    display: flex;
+    justify-content: flex-end;
+}
