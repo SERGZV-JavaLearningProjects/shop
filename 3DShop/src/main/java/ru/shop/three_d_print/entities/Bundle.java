@@ -27,8 +27,10 @@ public class Bundle
     public String getName() { return product.getName(); }
 
     public Product getProduct() { return product; }
-
+    
     public void setProduct(Product product) { this.product = product; }
+
+    public Long getProductId() { return product.getId(); }
 
     public int getQuantity() { return quantity; }
 

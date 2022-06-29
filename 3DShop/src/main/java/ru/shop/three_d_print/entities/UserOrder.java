@@ -20,9 +20,11 @@ public class UserOrder
 
     public void addBundle(Bundle bundle)
     {
-        var existBundle = bundles.stream().filter(b -> b.getProduct().getId().equals(bundle.getProduct().getId())).findAny().orElse(null);
+        var existBundle = bundles.stream().filter(b -> b.getProductId().equals(bundle.getProductId())).findAny().orElse(null);
 
         if (existBundle == null) bundles.add(bundle);
         else existBundle.setQuantity(existBundle.getQuantity() + bundle.getQuantity());
     }
+
+    public boolean deleteBundle(Long productId) { return bundles.removeIf(b -> b.getProductId().equals(productId)); }
 }

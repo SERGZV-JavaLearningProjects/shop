@@ -47,17 +47,11 @@ public class UserService implements UserDetailsService
         account.setUnencryptedPassword(account.getPassword());
         account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
 
-        User user = new User(account);
-        userRepository.save(user);
-
+        saveUser(new User(account));
         return checkResult;
     }
 
-    public String getCurrentUsername()
-    {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return auth.getName();
-    }
+    public void saveUser(User user) { userRepository.save(user); }
 
     public User loadUserById(Long userId)
     {
@@ -101,8 +95,7 @@ public class UserService implements UserDetailsService
 
     public void addOrder(Bundle bundle)
     {
-        var userName = getCurrentUsername();
-        User user = (User)loadUserByUsername(userName);
+        var user = getCurrentUser();
 
         var order = user.getOrder();
         if (order == null) order = new UserOrder();
@@ -112,12 +105,16 @@ public class UserService implements UserDetailsService
         userRepository.save(user);
     }
 
-    public UserOrder getOrder()
+    public User getCurrentUser()
     {
         var userName = getCurrentUsername();
-        User user = (User)loadUserByUsername(userName);
+        return (User)loadUserByUsername(userName);
+    }
 
-        return user.getOrder();
+    public String getCurrentUsername()
+    {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return auth.getName();
     }
 
     private List<ObjectError> ManualUserValidation(User user)
