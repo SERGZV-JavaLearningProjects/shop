@@ -70,12 +70,58 @@
     left: 75px;
     top: 15px;
 }
-.cart_control_panel_add_subtract
+.cart_small_control_panel
 {
     position: relative;
-    top: 15px;
+    top: 25px;
     width: 100px;
     height: 40px;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
 }
+.cart_small_control_panel_button
+{
+    background: var(--gray-blue);
+    color: var(--gray);
+    width: 24px;
+    height: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 25px;
+    border-radius: 12px;
+    border: none;
+}
+.cart_small_control_panel_button_minus
+{
+    padding: 0 0 10px 0;
+    line-height: 20px;
+}
+.cart_small_control_panel_button_plus
+{
+    padding: 0;
+    line-height: 27px;
+}
+.cart_small_control_panel_button:hover
+{
+    background: #00d9ff;
+    cursor: pointer;
+}
+.cart_small_control_panel_button:disabled
+{
+    background: rgba(76,83,92,0.1);
+    color: rgba(0,0,0,0.1);
+    cursor: not-allowed;
+}
+.cart_control_panel_add_subtract_input_field
+{
+    width: 35px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    text-align: center;
+    font-size: 20px;
+}
+.cart_control_panel_add_subtract_input_field::-webkit-outer-spin-button,
+.cart_control_panel_add_subtract_input_field::-webkit-inner-spin-button
+{ -webkit-appearance: none; }

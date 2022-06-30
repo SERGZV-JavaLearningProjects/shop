@@ -28,6 +28,13 @@ public class UserOrderService
         userService.saveUser(user);
     }
 
+    public void setNewCountBundleItems(Long bundleProductId, int newQuantity)
+    {
+        var user = userService.getCurrentUser();
+        user.getOrder().setNewCountBundleItems(bundleProductId, newQuantity);
+        userService.saveUser(user);
+    }
+
     public boolean deleteBundleFromUserCart(Long productId)
     {
         var user = userService.getCurrentUser();

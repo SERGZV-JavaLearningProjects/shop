@@ -17,4 +17,3 @@ function SetSelectedProductId(inputEl)
     const hiddenIdFields = document.getElementsByName('currentBundleProductId');
     hiddenIdFields[0].value = productId;
 }
-

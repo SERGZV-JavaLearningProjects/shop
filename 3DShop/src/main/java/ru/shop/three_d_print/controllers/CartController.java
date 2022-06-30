@@ -4,12 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.shop.three_d_print.service.UserOrderService;
-import ru.shop.three_d_print.service.UserService;
 
 @Controller
 @RequestMapping("/cart")
@@ -27,6 +23,15 @@ public class CartController
     @PreAuthorize("hasRole('ROLE_USER')")
     public String getCart(Model model)
     {
+        model.addAttribute("userOrder", userOrderService.getCurrentUserOrder());
+        return "cart/cart";
+    }
+
+    @PatchMapping("/update-bundle")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public String updateCountBundleItems(@RequestParam Long bundleProductId, @RequestParam int quantity, Model model)
+    {
+        userOrderService.setNewCountBundleItems(bundleProductId, quantity);
         model.addAttribute("userOrder", userOrderService.getCurrentUserOrder());
         return "cart/cart";
     }

@@ -18,6 +18,12 @@ public class UserOrder
 
     public List<Bundle> getBundles() { return bundles; }
 
+    public void setNewCountBundleItems(Long bundleProductId, int newQuantity)
+    {
+        var foundBundle = bundles.stream().filter(b -> b.getProductId().equals(bundleProductId)).findAny().orElse(null);
+        foundBundle.setQuantity(newQuantity);
+    }
+
     public void addBundle(Bundle bundle)
     {
         var existBundle = bundles.stream().filter(b -> b.getProductId().equals(bundle.getProductId())).findAny().orElse(null);
