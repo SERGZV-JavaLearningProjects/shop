@@ -3,7 +3,6 @@
     width:100%;
     min-height: 800px;
     margin: 10px 0;
-    border:1px solid var(--blue-two);
 }
 .cart_window
 {
@@ -25,6 +24,7 @@
     background: #2d54f5;
     width: 100%;
     height: 200px;
+    margin: 0 0 10px 0;
 }
 .cart_bundle_title {padding: 10px 20px;}
 .cart_bundle_border
@@ -55,6 +55,7 @@
     width: 80%;
     height: 120px;
     padding: 0 0 0 10px;
+    overflow: auto;
 }
 .cart_bundle_control_panel
 {

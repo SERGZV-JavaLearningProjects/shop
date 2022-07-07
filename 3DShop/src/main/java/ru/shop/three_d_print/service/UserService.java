@@ -26,7 +26,6 @@ public class UserService implements UserDetailsService
     @PersistenceContext
     private EntityManager em;
     private final UserRepository userRepository;
-
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired

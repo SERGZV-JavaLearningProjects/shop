@@ -17,7 +17,7 @@
 
             <div class="modal_window_root" id="deleteWarningModal">
                 <div class="small_warning_modal">
-                    <a class="small_warning_modal_close_button" title="Закрыть" onclick="ToggleWarningDeletePopup('false', 'deleteWarningModal')">X</a>
+                    <a class="small_warning_modal_close_button" title="Закрыть" onclick="ToggleWarningDeletePopup('false', this)">X</a>
                     <p>Эта кнопка удалит товар из корзины, вы действительно хотите удалить товар?</p>
 
                     <div class="small_warning_modal_button_panel">
@@ -29,7 +29,7 @@
                         </form>
                         <div>
                             <input class="small_warning_modal_button" type="image" src="/static/images/elements/product/product/green_button.png"
-                                   alt="Отмена" onclick="ToggleWarningDeletePopup('false', 'deleteWarningModal')">
+                                   alt="Отмена" onclick="ToggleWarningDeletePopup('false', this)">
                             <p class="small_warning_modal_button_text">Отмена</p>
                         </div>
                     </div>
@@ -44,7 +44,9 @@
                 </div>
                 <div class="cart_window" th:if="${userOrder.getBundles().size() > 0}">
                     <div class="cart_bundles_window">
+                        <input type="hidden" id="bundleCount" th:value="${userOrder.getBundles().size()}">
                         <div class="cart_bundle_block" th:each="bundle : ${userOrder.getBundles()}">
+                            <input type="hidden" name="productId" th:value="${bundle.getProductId()}">
                             <h2 class="cart_bundle_title" th:text="${bundle.getName()}"></h2>
                             <p class="cart_bundle_border"></p>
 
@@ -65,20 +67,20 @@
 
                                     <div class="cart_small_control_panel">
                                         <button class="cart_small_control_panel_button cart_small_control_panel_button_minus"
-                                                id="minusButton" title="Убавить" onclick="OnPlusMinusButton(-1)">
+                                                name="minusButton" th:value="${bundle.getProductId()}" title="Убавить" onclick="OnPlusMinusButton(-1, this)">
                                             -
                                         </button>
 
-                                        <input class="cart_control_panel_add_subtract_input_field" id="quantity"
+                                        <input class="cart_control_panel_add_subtract_input_field" name="quantityField"
                                                type="number" th:value="${bundle.quantity}" min="1" onchange="SetCountOrderedItems(this)">
 
-                                        <form th:method="PATCH" id="productPlusMinusForm" action="/cart/update-bundle">
+                                        <form th:method="PATCH" name="productPlusMinusForm" action="/cart/update-bundle">
                                             <input type="hidden" name="bundleProductId" th:value="${bundle.getProductId()}">
-                                            <input type="hidden" name="quantity">
+                                            <input type="hidden" th:value="${bundle.getQuantity()}" name="quantity">
                                         </form>
 
                                         <button class="cart_small_control_panel_button cart_small_control_panel_button_plus" title="Прибавить"
-                                                id="plusButton" onclick="OnPlusMinusButton(1)">
+                                                name="plusButton" th:value="${bundle.getProductId()}" onclick="OnPlusMinusButton(1, this)">
                                             +
                                         </button>
                                     </div>

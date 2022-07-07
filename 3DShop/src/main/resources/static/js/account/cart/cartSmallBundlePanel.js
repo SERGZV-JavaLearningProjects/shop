@@ -11,8 +11,10 @@ function InitCart()
 
 function SetInitAddRemoveButtonsStates()
 {
-    const quantityElement = document.getElementById('quantity');
-    // SetNewProductsQuantity(quantityElement, quantityElement);
+    const bundleCount = document.getElementById('bundleCount').value;
+
+    for (let bundleIndex = 0; bundleIndex < bundleCount; bundleIndex++)
+        UpdatePlusMinusButtonStates(bundleIndex);
 }
 
 function SetCountOrderedItems(quantityElement)
@@ -20,20 +22,24 @@ function SetCountOrderedItems(quantityElement)
     const newQuantity = quantityElement.value;
     const clampedQuantity = GetClampedProductQuantity(newQuantity, minProducts, maxProducts);
 
-    UpdatePlusMinusButtonsStates(clampedQuantity);
-    SetNewProductsQuantity(quantityElement, clampedQuantity);
+    SetHiddenFieldFormProductsQuantity(quantityElement, clampedQuantity);
+    UpdatePlusMinusButtonStates(clampedQuantity);
 }
 
-function OnPlusMinusButton(addedValue)
+function OnPlusMinusButton(addedValue, changeQuantityButton)
 {
-    const quantityElement = document.getElementById('quantity');
+    const bundleProductId = changeQuantityButton.value;
+    const bundleIndex = GetBundleIndexByProductId(bundleProductId);
+    const quantityElement = GetElementByBundleIndex(bundleIndex, 'quantityField');
+
     const newQuantity = parseInt(quantityElement.value) + parseInt(addedValue);
     const clampedQuantity = GetClampedProductQuantity(newQuantity, minProducts, maxProducts);
 
-    UpdatePlusMinusButtonsStates(clampedQuantity);
-    SetNewProductsQuantity(quantityElement, clampedQuantity);
+    SetFieldProductsQuantity(bundleIndex, clampedQuantity)
+    SetHiddenFieldFormProductsQuantity(quantityElement, clampedQuantity);
+    UpdatePlusMinusButtonStates(bundleIndex);
 
-    SubmitTheFormWithNewCountInSec(timeBeforeSubmittingForm);
+    SubmitTheFormWithNewCountInSec(bundleIndex, timeBeforeSubmittingForm);
 }
 
 function GetClampedProductQuantity(num, min, max)
@@ -41,35 +47,62 @@ function GetClampedProductQuantity(num, min, max)
     return Math.min(Math.max(num, min), max) ;
 }
 
-function UpdatePlusMinusButtonsStates(newQuantity)
+function UpdatePlusMinusButtonStates(bundleIndex)
 {
-    if(newQuantity < minProducts + 1) document.getElementById('minusButton').disabled = true;
-    else if(newQuantity > maxProducts - 1) document.getElementById('plusButton').disabled = true;
+    const quantityField = GetElementByBundleIndex(bundleIndex, 'quantityField');
+    const minusButton = GetElementByBundleIndex(bundleIndex, 'minusButton');
+    const plusButton = GetElementByBundleIndex(bundleIndex, 'plusButton');
+
+    if(quantityField.value < minProducts + 1) minusButton.disabled = true;
+    else if (quantityField.value > maxProducts - 1) plusButton.disabled = true;
     else
     {
-        document.getElementById('minusButton').disabled = false;
-        document.getElementById('plusButton').disabled = false;
+        minusButton.disabled = false;
+        plusButton.disabled = false;
     }
 }
 
-function SetNewProductsQuantity(quantityField, newQuantity)
+function SetFieldProductsQuantity(bundleIndex, newQuantity)
 {
+    const quantityField = GetElementByBundleIndex(bundleIndex, 'quantityField');
     quantityField.value = newQuantity;
 }
 
-function SubmitTheFormWithNewCountInSec(delayInSec)
+function SetHiddenFieldFormProductsQuantity(hiddenQuantityField, newQuantity)
+{
+    hiddenQuantityField.value = newQuantity;
+}
+
+function SubmitTheFormWithNewCountInSec(bundleIndex, delayInSec)
 {
     const millSecInSec = 1000;
     clearTimeout(lastTimerId);
 
     lastTimerId = setTimeout(() =>
     {
-        const buttonQuantityEl = document.getElementById('quantity');
-        const formQuantityEl = document.getElementsByName('quantity')[0];
-        formQuantityEl.value = buttonQuantityEl.value;
+        const quantityField = GetElementByBundleIndex(bundleIndex, 'quantityField');
+        const hiddenFormQuantityEl = GetElementByBundleIndex(bundleIndex, 'quantity');
+        const formEl = GetElementByBundleIndex(bundleIndex, 'productPlusMinusForm');
 
-        document.getElementById('productPlusMinusForm').submit();
+        hiddenFormQuantityEl.value = quantityField.value;
+        formEl.submit();
 
     }, delayInSec * millSecInSec);
 }
 
+function GetElementByBundleIndex(bundleIndex, elementName)
+{
+    const foundElements = document.getElementsByName(elementName);
+    return foundElements[bundleIndex];
+}
+
+function GetBundleIndexByProductId(productId)
+{
+    const bundleCount = document.getElementById('bundleCount').value;
+
+    for (let i = 0; i < bundleCount; i++)
+    {
+        let currentProductId = document.getElementsByName('productId')[i].value;
+        if (currentProductId === productId) return i;
+    }
+}
