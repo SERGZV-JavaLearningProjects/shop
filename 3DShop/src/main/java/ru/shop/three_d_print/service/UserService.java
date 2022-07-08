@@ -62,10 +62,10 @@ public class UserService implements UserDetailsService
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
         User user = userRepository.findByUsername(username);
-        if(user == null) throw new UsernameNotFoundException("User not found");
+        if (user == null) throw new UsernameNotFoundException("User not found");
 
         List<Bundle> bundles = user.getOrder().getBundles();
-        if(bundles.size() > 0) bundles.forEach(bundle -> bundle.getProduct().loadImageLinks());
+        if (bundles.size() > 0) bundles.forEach(bundle -> bundle.getProduct().loadImageLinks());
 
         return user;
     }

@@ -36,7 +36,10 @@ public class User implements UserDetails
     @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
     private UserOrder order;
 
-    public User() {}
+    public User()
+    {
+        order = new UserOrder();
+    }
 
     public User(Account account)
     {
