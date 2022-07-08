@@ -28,7 +28,7 @@
                         </select>
                         <input type="text" th:field="*{email}" placeholder="Email"/>
                         <input type="text" th:field="*{username}" placeholder="Your login"/>
-                        <input type="text" th:field="*{password}" placeholder="Password"/>
+                        <input type="password" th:field="*{password}" placeholder="Password"/>
                         <input style="width: 120px; height: 50px" type="submit" value="Create new user"/>
                     </div>
                     <div th:if="${#fields.hasErrors()}" class="error_window">

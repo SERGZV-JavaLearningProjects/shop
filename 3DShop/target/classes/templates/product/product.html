@@ -58,7 +58,7 @@
 
             <div class="second_column">
                 <h2 th:text="${bundle.getProduct().getName()}"></h2>
-                <p style="margin-top: 20px" th:text="${bundle.getProduct().getDescription()}"></p>
+                <p style="margin-top: 20px; overflow: auto" th:text="${bundle.getProduct().getDescription()}"></p>
 
                 <div th:if="${bundle.getProduct().getColor() != null}">
                     <p style="width: 100%; margin-top: 40px" th:text="${'Color: ' + bundle.getProduct().getColor()}"></p>
