@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/common/small_modal_window.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/account/cart.css">
+    <script type="text/javascript" src="/static/js/account/cart/cartSmallBundlePanel.js"></script>
+    <script type="text/javascript" src="/static/js/account/cart/warningPopup.js"></script>
+</head>
+<body style="margin: 0">
+    <div class="page">
+        <header th:insert="~{other/fragments :: header}"></header>
+
+        <main style="margin-left: 10%; margin-right: 10%;">
+
+            <div class="modal_window_root" id="deleteWarningModal">
+                <div class="small_warning_modal">
+                    <a class="small_warning_modal_close_button" title="Закрыть" onclick="ToggleWarningDeletePopup('false', this)">X</a>
+                    <p>Эта кнопка удалит товар из корзины, вы действительно хотите удалить товар?</p>
+
+                    <div class="small_warning_modal_button_panel">
+                        <form th:method="DELETE" action="/cart/delete-bundle">
+                            <input type="hidden" name="currentBundleProductId" value="1">
+                            <input class="small_warning_modal_button" type="image" src="/static/images/elements/product/product/blue_button.png"
+                                   alt="Удалить товар">
+                            <p class="small_warning_modal_button_text">Удалить товар</p>
+                        </form>
+                        <div>
+                            <input class="small_warning_modal_button" type="image" src="/static/images/elements/product/product/green_button.png"
+                                   alt="Отмена" onclick="ToggleWarningDeletePopup('false', this)">
+                            <p class="small_warning_modal_button_text">Отмена</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="cart_center_frame">
+
+                <div style="height: 800px; display: flex; align-items: center; justify-content: center" th:if="${userOrder.getBundles().size() == 0}">
+                    <h1>Ваша корзина пуста</h1>
+                </div>
+                <div class="cart_window" th:if="${userOrder.getBundles().size() > 0}">
+                    <div class="cart_bundles_window">
+                        <input type="hidden" id="bundleCount" th:value="${userOrder.getBundles().size()}">
+                        <div class="cart_bundle_block" th:each="bundle : ${userOrder.getBundles()}">
+                            <input type="hidden" name="productId" th:value="${bundle.getProductId()}">
+                            <h2 class="cart_bundle_title" th:text="${bundle.getName()}"></h2>
+                            <p class="cart_bundle_border"></p>
+
+                            <div class="cart_bundle_main_flex_box">
+                                <div class="cart_bundle_product_image_box">
+                                    <img class="cart_bundle_product_image" th:src="${bundle.getProduct().getImageLinks().get(0)}" alt="Product image">
+
+                                    <div class="cart_bundle_text_box">
+                                        <p th:text="${bundle.getProduct().getDescription()}">Описание</p>
+                                    </div>
+                                </div>
+
+                                <div class="cart_bundle_control_panel">
+
+                                <input class="cart_control_panel_bean_button" th:value="${bundle.getProductId()}"
+                                       onclick="ToggleWarningDeletePopup('true', this)"
+                                       type="image" src="/static/images/elements/account/cart/bin.png">
+
+                                    <div class="cart_small_control_panel">
+                                        <button class="cart_small_control_panel_button cart_small_control_panel_button_minus"
+                                                name="minusButton" th:value="${bundle.getProductId()}" title="Убавить" onclick="OnPlusMinusButton(-1, this)">
+                                            -
+                                        </button>
+
+                                        <input class="cart_control_panel_add_subtract_input_field" name="quantityField"
+                                               type="number" th:value="${bundle.quantity}" min="1" onchange="SetCountOrderedItems(this)">
+
+                                        <form th:method="PATCH" name="productPlusMinusForm" action="/cart/update-bundle">
+                                            <input type="hidden" name="bundleProductId" th:value="${bundle.getProductId()}">
+                                            <input type="hidden" th:value="${bundle.getQuantity()}" name="quantity">
+                                        </form>
+
+                                        <button class="cart_small_control_panel_button cart_small_control_panel_button_plus" title="Прибавить"
+                                                name="plusButton" th:value="${bundle.getProductId()}" onclick="OnPlusMinusButton(1, this)">
+                                            +
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="cart_bundle_bottom" >
+                                <div class="cart_bundle_price_box">
+                                    <h3 style="margin: 0 0 0 15px; text-align: center;" th:text="${bundle.getViewPrice()}"></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cart_buy_window">
+                        <h2 style="margin: 10px 0 0 15px">Сумма заказа</h2>
+                        <h3 style="margin: 10px 0 0 15px" th:text="${userOrder.getViewPrice()}"></h3>
+
+                        <form class="cart_buy_window_form" method="POST" action="/paid-orders/order">
+                            <input class="small_warning_modal_button" type="image" src="/static/images/elements/product/product/blue_button.png"
+                                   alt="Удалить товар">
+                            <p class="cart_buy_form_button_text">Купить</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer th:insert="~{other/fragments :: footer}" style="margin-top: auto;"></footer>
+    </div>
+    <script> InitCart(); </script>
+</body>
+</html>

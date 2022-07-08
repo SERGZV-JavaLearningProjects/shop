@@ -15,8 +15,16 @@ public class PaidBundle
     @OneToOne
     private Product product;
     private int quantity;
+    private boolean delivered;
 
     public PaidBundle(){}
+
+    public PaidBundle(PaidOrder paidOrder, Bundle bundle)
+    {
+        this.paidOrder = paidOrder;
+        product = bundle.getProduct();
+        quantity = bundle.getQuantity();
+    }
 
     public PaidBundle(PaidOrder paidOrder, Product product, int quantity)
     {

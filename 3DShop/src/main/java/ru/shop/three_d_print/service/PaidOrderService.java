@@ -2,14 +2,11 @@ package ru.shop.three_d_print.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.shop.three_d_print.entities.PaidBundle;
-import ru.shop.three_d_print.entities.PaidOrder;
-import ru.shop.three_d_print.entities.Product;
+import ru.shop.three_d_print.entities.*;
 import ru.shop.three_d_print.repository.PaidOrderRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PaidOrderService
@@ -24,14 +21,29 @@ public class PaidOrderService
         this.productService = productService;
     }
 
+    public void makeAnOrder(User user)
+    {
+        if (user.getOrder().getBundles().size() <= 0) return;
+
+        PaidOrder paidOrder = new PaidOrder(user.getOrder(), user.getId());
+
+
+        // Удалить данные из order
+        // сохранить ордер
+        // Сохранить paidOrder
+
+
+        String test;
+    }
+
     public void TestPaidOrder()
     {
         PaidOrder paidOrder = new PaidOrder();
-        Optional<Product> product1 = productService.findById(1L);
-        Optional<Product> product2 = productService.findById(2L);
+        Product product1 = productService.findById(1L);
+        Product product2 = productService.findById(2L);
 
-        PaidBundle bundle1 = new PaidBundle(paidOrder, product1.get(), 2);
-        PaidBundle bundle2 = new PaidBundle(paidOrder, product2.get(), 4);
+        PaidBundle bundle1 = new PaidBundle(paidOrder, product1, 2);
+        PaidBundle bundle2 = new PaidBundle(paidOrder, product2, 4);
 
         List<PaidBundle> bundles = new ArrayList<>();
         bundles.add(bundle1);

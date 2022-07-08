@@ -1,6 +1,9 @@
 package ru.shop.three_d_print.entities;
 
+import ru.shop.three_d_print.formatting.FormatText;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,12 +13,38 @@ public class UserOrder
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")
-    private List<Bundle> bundles;
+    private final List<Bundle> bundles = new ArrayList<>();
+
+    public Long getId() { return id; }
 
     public List<Bundle> getBundles() { return bundles; }
 
-    public void setBundles(List<Bundle> bundles) { this.bundles = bundles; }
+    public void setNewCountBundleItems(Long bundleProductId, int newQuantity)
+    {
+        var foundBundle = bundles.stream().filter(b -> b.getProductId().equals(bundleProductId)).findAny().orElse(null);
+        foundBundle.setQuantity(newQuantity);
+    }
+
+    public void addBundle(Bundle bundle)
+    {
+        var existBundle = bundles.stream().filter(b -> b.getProductId().equals(bundle.getProductId())).findAny().orElse(null);
+
+        if (existBundle == null) bundles.add(bundle);
+        else existBundle.setQuantity(existBundle.getQuantity() + bundle.getQuantity());
+    }
+
+    public boolean deleteBundle(Long productId) { return bundles.removeIf(b -> b.getProductId().equals(productId)); }
+
+    public String getViewPrice()
+    {
+        int userOrderPrice = 0;
+        for (var bundle : bundles)
+        {
+            userOrderPrice += bundle.getPrice();
+        }
+
+        return FormatText.formatIntToViewPrice(userOrderPrice);
+    }
 }

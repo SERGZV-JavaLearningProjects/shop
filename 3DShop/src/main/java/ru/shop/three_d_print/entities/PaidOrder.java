@@ -1,6 +1,7 @@
 package ru.shop.three_d_print.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -9,13 +10,24 @@ public class PaidOrder
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long row_id;
+    private Long id;
     private Long order_id;
     private Long user_id;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "paidOrder", cascade = CascadeType.ALL)
-    private List<PaidBundle> bundles;
+    private List<PaidBundle> bundles = new ArrayList<>();
 
     public PaidOrder(){}
+
+    public PaidOrder(UserOrder userOrder, Long userId)
+    {
+        order_id = userOrder.getId();
+        user_id = userId;
+
+        for (var bundle : userOrder.getBundles())
+        {
+            bundles.add(new PaidBundle(this, bundle));
+        }
+    }
 
     public void setOrder(Long order_id, Long user_id, List<PaidBundle> bundles)
     {

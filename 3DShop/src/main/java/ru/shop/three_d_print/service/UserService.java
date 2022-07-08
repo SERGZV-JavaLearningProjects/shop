@@ -1,7 +1,6 @@
 package ru.shop.three_d_print.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.ObjectError;
 
 import ru.shop.three_d_print.entities.*;
-import ru.shop.three_d_print.repository.RoleRepository;
 import ru.shop.three_d_print.repository.UserRepository;
 
 import javax.persistence.EntityManager;
@@ -28,23 +26,13 @@ public class UserService implements UserDetailsService
     @PersistenceContext
     private EntityManager em;
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final ProductService productService;
 
     @Autowired
-    public UserService
-    (
-        UserRepository userRepository,
-        RoleRepository roleRepository,
-        BCryptPasswordEncoder bCryptPasswordEncoder,
-        ProductService productService
-    )
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder)
     {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.productService = productService;
     }
 
     public Account newAccount() { return new Account(); }
@@ -58,40 +46,11 @@ public class UserService implements UserDetailsService
         account.setUnencryptedPassword(account.getPassword());
         account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
 
-        User user = new User(account);
-        userRepository.save(user);
-
+        saveUser(new User(account));
         return checkResult;
     }
 
-    public void TestOrder()
-    {
-        User user = userRepository.findById(27L).get();
-
-        Optional<Product> product1 = productService.findById(1L);
-        Optional<Product> product2 = productService.findById(2L);
-
-        Bundle bundle1 = new Bundle(product1.get(), 5);
-        Bundle bundle2 = new Bundle(product2.get(), 2);
-
-        UserOrder order = new UserOrder();
-
-        List<Bundle> bundles = new ArrayList<>();
-        bundles.add(bundle1);
-        bundles.add(bundle2);
-
-        order.setBundles(bundles);
-
-        user.setOrder(order);
-
-        userRepository.save(user);
-    }
-
-    public String getCurrentUsername()
-    {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return auth.getName();
-    }
+    public void saveUser(User user) { userRepository.save(user); }
 
     public User loadUserById(Long userId)
     {
@@ -103,7 +62,11 @@ public class UserService implements UserDetailsService
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
         User user = userRepository.findByUsername(username);
-        if(user == null) throw new UsernameNotFoundException("User not found");
+        if (user == null) throw new UsernameNotFoundException("User not found");
+
+        List<Bundle> bundles = user.getOrder().getBundles();
+        if (bundles.size() > 0) bundles.forEach(bundle -> bundle.getProduct().loadImageLinks());
+
         return user;
     }
 
@@ -129,6 +92,30 @@ public class UserService implements UserDetailsService
         return false;
     }
 
+    public void addOrder(Bundle bundle)
+    {
+        var user = getCurrentUser();
+
+        var order = user.getOrder();
+        if (order == null) order = new UserOrder();
+        order.addBundle(bundle);
+        user.setOrder(order);
+
+        userRepository.save(user);
+    }
+
+    public User getCurrentUser()
+    {
+        var userName = getCurrentUsername();
+        return (User)loadUserByUsername(userName);
+    }
+
+    public String getCurrentUsername()
+    {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return auth.getName();
+    }
+
     private List<ObjectError> ManualUserValidation(User user)
     {
         List<ObjectError> checkResult = checkForMatches(user);
@@ -136,8 +123,8 @@ public class UserService implements UserDetailsService
         if(user.getPassword().length() < 8 || user.getPassword().length() > 40)
             checkResult.add(new ObjectError
             (
-                    "password",
-                    "Password length must be between 8 and 40 letters"
+                "password",
+                "Password length must be between 8 and 40 letters"
             ));
 
         return checkResult;
