@@ -88,10 +88,24 @@
                                 </div>
 
                             </div>
+
+                            <div class="cart_bundle_bottom" >
+                                <div class="cart_bundle_price_box">
+                                    <h3 style="margin: 0 0 0 15px; text-align: center;" th:text="${bundle.getViewPrice()}"></h3>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="cart_buy_window">
 
+                    <div class="cart_buy_window">
+                        <h2 style="margin: 10px 0 0 15px">Сумма заказа</h2>
+                        <h3 style="margin: 10px 0 0 15px" th:text="${userOrder.getViewPrice()}"></h3>
+
+                        <form class="cart_buy_window_form" method="POST" action="/paid-orders/order">
+                            <input class="small_warning_modal_button" type="image" src="/static/images/elements/product/product/blue_button.png"
+                                   alt="Удалить товар">
+                            <p class="cart_buy_form_button_text">Купить</p>
+                        </form>
                     </div>
                 </div>
             </div>

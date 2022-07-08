@@ -2,9 +2,7 @@ package ru.shop.three_d_print.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.shop.three_d_print.entities.PaidBundle;
-import ru.shop.three_d_print.entities.PaidOrder;
-import ru.shop.three_d_print.entities.Product;
+import ru.shop.three_d_print.entities.*;
 import ru.shop.three_d_print.repository.PaidOrderRepository;
 
 import java.util.ArrayList;
@@ -21,6 +19,21 @@ public class PaidOrderService
     {
         this.paidOrderRepository = paidOrderRepository;
         this.productService = productService;
+    }
+
+    public void makeAnOrder(User user)
+    {
+        if (user.getOrder().getBundles().size() <= 0) return;
+
+        PaidOrder paidOrder = new PaidOrder(user.getOrder(), user.getId());
+
+
+        // Удалить данные из order
+        // сохранить ордер
+        // Сохранить paidOrder
+
+
+        String test;
     }
 
     public void TestPaidOrder()

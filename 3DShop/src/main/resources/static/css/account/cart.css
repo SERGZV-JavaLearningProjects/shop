@@ -19,6 +19,20 @@
     width: 20%;
     height: 200px;
 }
+.cart_buy_window_form
+{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 40px 0 0 0;
+}
+.cart_buy_form_button_text
+{
+    position: absolute;
+    margin: 25px;
+    pointer-events: none;
+    font-size: 25px;
+}
 .cart_bundle_block
 {
     background: #2d54f5;
@@ -126,3 +140,14 @@
 .cart_control_panel_add_subtract_input_field::-webkit-outer-spin-button,
 .cart_control_panel_add_subtract_input_field::-webkit-inner-spin-button
 { -webkit-appearance: none; }
+.cart_bundle_bottom
+{
+    display: flex;
+    justify-content: flex-end;
+    height: 22px;
+}
+.cart_bundle_price_box
+{
+    width: 100px;
+    margin: 0 25px 0 0;
+}

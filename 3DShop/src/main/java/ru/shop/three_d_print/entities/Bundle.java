@@ -1,5 +1,7 @@
 package ru.shop.three_d_print.entities;
 
+import ru.shop.three_d_print.formatting.FormatText;
+
 import javax.persistence.*;
 
 /**
@@ -35,4 +37,8 @@ public class Bundle
     public int getQuantity() { return quantity; }
 
     public void setQuantity(int quantity) { this.quantity = quantity; }
+
+    public int getPrice() { return product.getPrice() * quantity; }
+
+    public String getViewPrice() { return FormatText.formatIntToViewPrice(getPrice()); }
 }

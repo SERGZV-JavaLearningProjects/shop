@@ -1,5 +1,7 @@
 package ru.shop.three_d_print.entities;
 
+import ru.shop.three_d_print.formatting.FormatText;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +13,11 @@ public class UserOrder
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")
     private final List<Bundle> bundles = new ArrayList<>();
+
+    public Long getId() { return id; }
 
     public List<Bundle> getBundles() { return bundles; }
 
@@ -33,4 +36,15 @@ public class UserOrder
     }
 
     public boolean deleteBundle(Long productId) { return bundles.removeIf(b -> b.getProductId().equals(productId)); }
+
+    public String getViewPrice()
+    {
+        int userOrderPrice = 0;
+        for (var bundle : bundles)
+        {
+            userOrderPrice += bundle.getPrice();
+        }
+
+        return FormatText.formatIntToViewPrice(userOrderPrice);
+    }
 }
